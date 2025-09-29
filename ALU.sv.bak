@@ -1,0 +1,9 @@
+module ALU(
+input wire algo,
+output reg otracosa
+);
+
+
+
+endmodule
+

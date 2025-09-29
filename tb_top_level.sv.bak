@@ -1,0 +1,46 @@
+`timescale 1ns/1ps
+
+module tb_top_level;
+
+    // Señales del testbench
+    reg clk;
+    reg rst_n;
+    wire [9:0] leds;
+    wire [6:0] display0, display1, display2, display3, display4, display5;
+
+    // Instanciación del módulo top_level
+    top_level uut(
+        .clk(clk),
+        .rst_n(rst_n),
+        .leds(leds),
+        .display0(display0),
+        .display1(display1),
+        .display2(display2),
+        .display3(display3),
+        .display4(display4),
+        .display5(display5)
+    );
+
+    // Generador de reloj: periodo de 10 ns
+    initial clk = 0;
+    always #5 clk = ~clk;
+
+    initial begin
+        // Inicialización
+        rst_n = 0;
+        #12;      // Esperar un poco con reset activo
+
+        rst_n = 1; // Quitar el reset para comenzar
+        #100;      // Simular por 100 ns más
+
+        // Finaliza la simulación
+        $finish;
+    end
+
+    // Monitor para observar salidas en cada flanco de reloj
+    always @(posedge clk) begin
+        $display("Time: %0d; leds: %b; display0: %b; display1: %b; display2: %b; display3: %b; display4: %b; display5: %b", 
+            $time, leds, display0, display1, display2, display3, display4, display5);
+    end
+
+endmodule

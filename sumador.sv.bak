@@ -1,0 +1,10 @@
+module sumador(
+input wire address,
+output wire nextPC
+);
+
+assign nextPC = address+4
+
+
+
+endmodule

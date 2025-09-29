@@ -1,0 +1,12 @@
+module pc(
+input clk,
+input wire nextPC[31:0],
+output wire pc[31:0]
+);
+
+always @(posedge clk)begin
+assign pc = nextPC;
+end
+
+
+endmodule
