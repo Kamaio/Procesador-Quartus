@@ -1,5 +1,5 @@
 Analysis & Synthesis report for RiscVpc
-Sun Sep 28 23:33:18 2025
+Wed Oct  1 17:31:28 2025
 Quartus Prime Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
 
 
@@ -44,7 +44,7 @@ on the Quartus Prime software download page.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +---------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sun Sep 28 23:33:18 2025           ;
+; Analysis & Synthesis Status     ; Successful - Wed Oct  1 17:31:28 2025           ;
 ; Quartus Prime Version           ; 24.1std.0 Build 1077 03/04/2025 SC Lite Edition ;
 ; Revision Name                   ; RiscVpc                                         ;
 ; Top-level Entity Name           ; top_level                                       ;
@@ -280,7 +280,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -290,7 +290,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
-    Info: Processing started: Sun Sep 28 23:32:59 2025
+    Info: Processing started: Wed Oct  1 17:31:15 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RiscVpc -c RiscVpc
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
@@ -306,6 +306,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file tb_top_
     Info (12023): Found entity 1: tb_top_level File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/tb_top_level.sv Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file alu.sv
     Info (12023): Found entity 1: ALU File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/ALU.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file register_unit.sv
+    Info (12023): Found entity 1: register_unit File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/register_unit.sv Line: 1
 Info (12127): Elaborating entity "top_level" for the top level hierarchy
 Info (12128): Elaborating entity "sumador" for hierarchy "sumador:sumar" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 21
 Info (12128): Elaborating entity "pc" for hierarchy "pc:pcInst" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 29
@@ -332,9 +334,9 @@ Info (21057): Implemented 114 device resources after synthesis - the final resou
     Info (21059): Implemented 52 output pins
     Info (21061): Implemented 60 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 14 warnings
-    Info: Peak virtual memory: 4871 megabytes
-    Info: Processing ended: Sun Sep 28 23:33:18 2025
-    Info: Elapsed time: 00:00:19
-    Info: Total CPU time (on all processors): 00:00:33
+    Info: Peak virtual memory: 4867 megabytes
+    Info: Processing ended: Wed Oct  1 17:31:28 2025
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:28
 
 
