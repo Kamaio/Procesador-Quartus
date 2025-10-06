@@ -6,6 +6,12 @@ module instructionMemory(
 
 	reg [31:0] instrucciones [0:127];
 	
+	initial begin
+	
+		$readmemb("output.bin", instrucciones);
+		
+	end
+	
 	assign instruccion = instrucciones[PC/4];
 	
 

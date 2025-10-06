@@ -1,5 +1,5 @@
 Analysis & Synthesis report for RiscVpc
-Wed Oct  1 17:31:28 2025
+Fri Oct  3 18:23:27 2025
 Quartus Prime Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
 
 
@@ -14,10 +14,11 @@ Quartus Prime Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Post-Synthesis Netlist Statistics for Top Partition
- 11. Elapsed Time Per Partition
- 12. Analysis & Synthesis Messages
+  9. Removed Registers Triggering Further Register Optimizations
+ 10. General Register Statistics
+ 11. Post-Synthesis Netlist Statistics for Top Partition
+ 12. Elapsed Time Per Partition
+ 13. Analysis & Synthesis Messages
 
 
 
@@ -44,7 +45,7 @@ on the Quartus Prime software download page.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +---------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed Oct  1 17:31:28 2025           ;
+; Analysis & Synthesis Status     ; Successful - Fri Oct  3 18:23:27 2025           ;
 ; Quartus Prime Version           ; 24.1std.0 Build 1077 03/04/2025 SC Lite Edition ;
 ; Revision Name                   ; RiscVpc                                         ;
 ; Top-level Entity Name           ; top_level                                       ;
@@ -168,16 +169,21 @@ on the Quartus Prime software download page.
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                   ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                               ; Library ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
-; top_level.v                      ; yes             ; User Verilog HDL File        ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v ;         ;
-; pc.v                             ; yes             ; User Verilog HDL File        ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/pc.v        ;         ;
-; hex7seg.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/hex7seg.sv  ;         ;
-; sumador.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/sumador.sv  ;         ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                            ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                        ; Library ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+---------+
+; top_level.v                      ; yes             ; User Verilog HDL File        ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v          ;         ;
+; pc.v                             ; yes             ; User Verilog HDL File        ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/pc.v                 ;         ;
+; hex7seg.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/hex7seg.sv           ;         ;
+; sumador.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/sumador.sv           ;         ;
+; ALU.sv                           ; yes             ; User SystemVerilog HDL File  ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/ALU.sv               ;         ;
+; register_unit.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/register_unit.sv     ;         ;
+; instructionMemory.sv             ; yes             ; User SystemVerilog HDL File  ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/instructionMemory.sv ;         ;
+; control_unit.sv                  ; yes             ; User SystemVerilog HDL File  ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/control_unit.sv      ;         ;
+; output.bin                       ; yes             ; Auto-Found Unspecified File  ; C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/output.bin           ;         ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -185,14 +191,14 @@ on the Quartus Prime software download page.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimate of Logic utilization (ALMs needed) ; 30        ;
+; Estimate of Logic utilization (ALMs needed) ; 32        ;
 ;                                             ;           ;
-; Combinational ALUT usage for logic          ; 59        ;
+; Combinational ALUT usage for logic          ; 63        ;
 ;     -- 7 input functions                    ; 0         ;
 ;     -- 6 input functions                    ; 0         ;
-;     -- 5 input functions                    ; 0         ;
-;     -- 4 input functions                    ; 35        ;
-;     -- <=3 input functions                  ; 24        ;
+;     -- 5 input functions                    ; 3         ;
+;     -- 4 input functions                    ; 48        ;
+;     -- <=3 input functions                  ; 12        ;
 ;                                             ;           ;
 ; Dedicated logic registers                   ; 22        ;
 ;                                             ;           ;
@@ -202,39 +208,1102 @@ on the Quartus Prime software download page.
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
 ; Maximum fan-out                             ; 22        ;
-; Total fan-out                               ; 348       ;
-; Average fan-out                             ; 1.84      ;
+; Total fan-out                               ; 402       ;
+; Average fan-out                             ; 2.08      ;
 +---------------------------------------------+-----------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                             ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------+-------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name          ; Entity Name ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------+-------------+--------------+
-; |top_level                 ; 59 (0)              ; 22 (0)                    ; 0                 ; 0          ; 54   ; 0            ; |top_level                   ; top_level   ; work         ;
-;    |hex7seg:displayN0|     ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN0 ; hex7seg     ; work         ;
-;    |hex7seg:displayN1|     ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN1 ; hex7seg     ; work         ;
-;    |hex7seg:displayN2|     ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN2 ; hex7seg     ; work         ;
-;    |hex7seg:displayN3|     ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN3 ; hex7seg     ; work         ;
-;    |hex7seg:displayN4|     ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN4 ; hex7seg     ; work         ;
-;    |hex7seg:displayN5|     ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN5 ; hex7seg     ; work         ;
-;    |pc:pcInst|             ; 1 (1)               ; 22 (22)                   ; 0                 ; 0          ; 0    ; 0            ; |top_level|pc:pcInst         ; pc          ; work         ;
-;    |sumador:sumar|         ; 21 (21)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|sumador:sumar     ; sumador     ; work         ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------+-------------+--------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                           ;
++------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------+-------------------+--------------+
+; Compilation Hierarchy Node   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                ; Entity Name       ; Library Name ;
++------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------+-------------------+--------------+
+; |top_level                   ; 63 (0)              ; 22 (0)                    ; 0                 ; 0          ; 54   ; 0            ; |top_level                         ; top_level         ; work         ;
+;    |ALU:operaciones|         ; 12 (12)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|ALU:operaciones         ; ALU               ; work         ;
+;    |hex7seg:displayN0|       ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN0       ; hex7seg           ; work         ;
+;    |hex7seg:displayN1|       ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN1       ; hex7seg           ; work         ;
+;    |hex7seg:displayN2|       ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN2       ; hex7seg           ; work         ;
+;    |hex7seg:displayN3|       ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN3       ; hex7seg           ; work         ;
+;    |hex7seg:displayN4|       ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN4       ; hex7seg           ; work         ;
+;    |hex7seg:displayN5|       ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|hex7seg:displayN5       ; hex7seg           ; work         ;
+;    |instructionMemory:imem|  ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|instructionMemory:imem  ; instructionMemory ; work         ;
+;    |pc:pcInst|               ; 1 (1)               ; 10 (10)                   ; 0                 ; 0          ; 0    ; 0            ; |top_level|pc:pcInst               ; pc                ; work         ;
+;    |register_unit:registros| ; 0 (0)               ; 12 (12)                   ; 0                 ; 0          ; 0    ; 0            ; |top_level|register_unit:registros ; register_unit     ; work         ;
+;    |sumador:sumar|           ; 9 (9)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_level|sumador:sumar           ; sumador           ; work         ;
++------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------+-------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+---------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                              ;
-+----------------------------------------+----------------------------------------+
-; Register name                          ; Reason for Removal                     ;
-+----------------------------------------+----------------------------------------+
-; pc:pcInst|address[1]                   ; Merged with pc:pcInst|address[0]       ;
-; pc:pcInst|address[0]                   ; Stuck at GND due to stuck port data_in ;
-; pc:pcInst|address[24..31]              ; Lost fanout                            ;
-; Total Number of Removed Registers = 10 ;                                        ;
-+----------------------------------------+----------------------------------------+
++-----------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                ;
++------------------------------------------+----------------------------------------+
+; Register name                            ; Reason for Removal                     ;
++------------------------------------------+----------------------------------------+
+; pc:pcInst|address[1]                     ; Merged with pc:pcInst|address[0]       ;
+; pc:pcInst|address[0]                     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~96     ; Lost fanout                            ;
+; register_unit:registros|Registros~97     ; Lost fanout                            ;
+; register_unit:registros|Registros~98     ; Lost fanout                            ;
+; register_unit:registros|Registros~99     ; Lost fanout                            ;
+; register_unit:registros|Registros~100    ; Lost fanout                            ;
+; register_unit:registros|Registros~101    ; Lost fanout                            ;
+; register_unit:registros|Registros~102    ; Lost fanout                            ;
+; register_unit:registros|Registros~103    ; Lost fanout                            ;
+; register_unit:registros|Registros~104    ; Lost fanout                            ;
+; register_unit:registros|Registros~105    ; Lost fanout                            ;
+; register_unit:registros|Registros~106    ; Lost fanout                            ;
+; register_unit:registros|Registros~107    ; Lost fanout                            ;
+; register_unit:registros|Registros~108    ; Lost fanout                            ;
+; register_unit:registros|Registros~109    ; Lost fanout                            ;
+; register_unit:registros|Registros~110    ; Lost fanout                            ;
+; register_unit:registros|Registros~111    ; Lost fanout                            ;
+; register_unit:registros|Registros~112    ; Lost fanout                            ;
+; register_unit:registros|Registros~113    ; Lost fanout                            ;
+; register_unit:registros|Registros~114    ; Lost fanout                            ;
+; register_unit:registros|Registros~115    ; Lost fanout                            ;
+; register_unit:registros|Registros~116    ; Lost fanout                            ;
+; register_unit:registros|Registros~117    ; Lost fanout                            ;
+; register_unit:registros|Registros~118    ; Lost fanout                            ;
+; register_unit:registros|Registros~119    ; Lost fanout                            ;
+; register_unit:registros|Registros~120    ; Lost fanout                            ;
+; register_unit:registros|Registros~121    ; Lost fanout                            ;
+; register_unit:registros|Registros~122    ; Lost fanout                            ;
+; register_unit:registros|Registros~123    ; Lost fanout                            ;
+; register_unit:registros|Registros~124    ; Lost fanout                            ;
+; register_unit:registros|Registros~125    ; Lost fanout                            ;
+; register_unit:registros|Registros~126    ; Lost fanout                            ;
+; register_unit:registros|Registros~127    ; Lost fanout                            ;
+; register_unit:registros|Registros~128    ; Lost fanout                            ;
+; register_unit:registros|Registros~129    ; Lost fanout                            ;
+; register_unit:registros|Registros~130    ; Lost fanout                            ;
+; register_unit:registros|Registros~131    ; Lost fanout                            ;
+; register_unit:registros|Registros~132    ; Lost fanout                            ;
+; register_unit:registros|Registros~133    ; Lost fanout                            ;
+; register_unit:registros|Registros~134    ; Lost fanout                            ;
+; register_unit:registros|Registros~135    ; Lost fanout                            ;
+; register_unit:registros|Registros~136    ; Lost fanout                            ;
+; register_unit:registros|Registros~137    ; Lost fanout                            ;
+; register_unit:registros|Registros~138    ; Lost fanout                            ;
+; register_unit:registros|Registros~139    ; Lost fanout                            ;
+; register_unit:registros|Registros~140    ; Lost fanout                            ;
+; register_unit:registros|Registros~141    ; Lost fanout                            ;
+; register_unit:registros|Registros~142    ; Lost fanout                            ;
+; register_unit:registros|Registros~143    ; Lost fanout                            ;
+; register_unit:registros|Registros~144    ; Lost fanout                            ;
+; register_unit:registros|Registros~145    ; Lost fanout                            ;
+; register_unit:registros|Registros~146    ; Lost fanout                            ;
+; register_unit:registros|Registros~147    ; Lost fanout                            ;
+; register_unit:registros|Registros~148    ; Lost fanout                            ;
+; register_unit:registros|Registros~149    ; Lost fanout                            ;
+; register_unit:registros|Registros~150    ; Lost fanout                            ;
+; register_unit:registros|Registros~151    ; Lost fanout                            ;
+; register_unit:registros|Registros~152    ; Lost fanout                            ;
+; register_unit:registros|Registros~153    ; Lost fanout                            ;
+; register_unit:registros|Registros~154    ; Lost fanout                            ;
+; register_unit:registros|Registros~155    ; Lost fanout                            ;
+; register_unit:registros|Registros~156    ; Lost fanout                            ;
+; register_unit:registros|Registros~157    ; Lost fanout                            ;
+; register_unit:registros|Registros~158    ; Lost fanout                            ;
+; register_unit:registros|Registros~159    ; Lost fanout                            ;
+; register_unit:registros|Registros~160    ; Lost fanout                            ;
+; register_unit:registros|Registros~161    ; Lost fanout                            ;
+; register_unit:registros|Registros~162    ; Lost fanout                            ;
+; register_unit:registros|Registros~163    ; Lost fanout                            ;
+; register_unit:registros|Registros~164    ; Lost fanout                            ;
+; register_unit:registros|Registros~165    ; Lost fanout                            ;
+; register_unit:registros|Registros~166    ; Lost fanout                            ;
+; register_unit:registros|Registros~167    ; Lost fanout                            ;
+; register_unit:registros|Registros~168    ; Lost fanout                            ;
+; register_unit:registros|Registros~169    ; Lost fanout                            ;
+; register_unit:registros|Registros~170    ; Lost fanout                            ;
+; register_unit:registros|Registros~171    ; Lost fanout                            ;
+; register_unit:registros|Registros~172    ; Lost fanout                            ;
+; register_unit:registros|Registros~173    ; Lost fanout                            ;
+; register_unit:registros|Registros~174    ; Lost fanout                            ;
+; register_unit:registros|Registros~175    ; Lost fanout                            ;
+; register_unit:registros|Registros~176    ; Lost fanout                            ;
+; register_unit:registros|Registros~177    ; Lost fanout                            ;
+; register_unit:registros|Registros~178    ; Lost fanout                            ;
+; register_unit:registros|Registros~179    ; Lost fanout                            ;
+; register_unit:registros|Registros~180    ; Lost fanout                            ;
+; register_unit:registros|Registros~181    ; Lost fanout                            ;
+; register_unit:registros|Registros~182    ; Lost fanout                            ;
+; register_unit:registros|Registros~183    ; Lost fanout                            ;
+; register_unit:registros|Registros~184    ; Lost fanout                            ;
+; register_unit:registros|Registros~185    ; Lost fanout                            ;
+; register_unit:registros|Registros~186    ; Lost fanout                            ;
+; register_unit:registros|Registros~187    ; Lost fanout                            ;
+; register_unit:registros|Registros~188    ; Lost fanout                            ;
+; register_unit:registros|Registros~189    ; Lost fanout                            ;
+; register_unit:registros|Registros~190    ; Lost fanout                            ;
+; register_unit:registros|Registros~191    ; Lost fanout                            ;
+; register_unit:registros|Registros~192    ; Lost fanout                            ;
+; register_unit:registros|Registros~193    ; Lost fanout                            ;
+; register_unit:registros|Registros~194    ; Lost fanout                            ;
+; register_unit:registros|Registros~195    ; Lost fanout                            ;
+; register_unit:registros|Registros~196    ; Lost fanout                            ;
+; register_unit:registros|Registros~197    ; Lost fanout                            ;
+; register_unit:registros|Registros~198    ; Lost fanout                            ;
+; register_unit:registros|Registros~199    ; Lost fanout                            ;
+; register_unit:registros|Registros~200    ; Lost fanout                            ;
+; register_unit:registros|Registros~201    ; Lost fanout                            ;
+; register_unit:registros|Registros~202    ; Lost fanout                            ;
+; register_unit:registros|Registros~203    ; Lost fanout                            ;
+; register_unit:registros|Registros~204    ; Lost fanout                            ;
+; register_unit:registros|Registros~205    ; Lost fanout                            ;
+; register_unit:registros|Registros~206    ; Lost fanout                            ;
+; register_unit:registros|Registros~207    ; Lost fanout                            ;
+; register_unit:registros|Registros~208    ; Lost fanout                            ;
+; register_unit:registros|Registros~209    ; Lost fanout                            ;
+; register_unit:registros|Registros~210    ; Lost fanout                            ;
+; register_unit:registros|Registros~211    ; Lost fanout                            ;
+; register_unit:registros|Registros~212    ; Lost fanout                            ;
+; register_unit:registros|Registros~213    ; Lost fanout                            ;
+; register_unit:registros|Registros~214    ; Lost fanout                            ;
+; register_unit:registros|Registros~215    ; Lost fanout                            ;
+; register_unit:registros|Registros~216    ; Lost fanout                            ;
+; register_unit:registros|Registros~217    ; Lost fanout                            ;
+; register_unit:registros|Registros~218    ; Lost fanout                            ;
+; register_unit:registros|Registros~219    ; Lost fanout                            ;
+; register_unit:registros|Registros~220    ; Lost fanout                            ;
+; register_unit:registros|Registros~221    ; Lost fanout                            ;
+; register_unit:registros|Registros~222    ; Lost fanout                            ;
+; register_unit:registros|Registros~223    ; Lost fanout                            ;
+; register_unit:registros|Registros~224    ; Lost fanout                            ;
+; register_unit:registros|Registros~225    ; Lost fanout                            ;
+; register_unit:registros|Registros~226    ; Lost fanout                            ;
+; register_unit:registros|Registros~227    ; Lost fanout                            ;
+; register_unit:registros|Registros~228    ; Lost fanout                            ;
+; register_unit:registros|Registros~229    ; Lost fanout                            ;
+; register_unit:registros|Registros~230    ; Lost fanout                            ;
+; register_unit:registros|Registros~231    ; Lost fanout                            ;
+; register_unit:registros|Registros~232    ; Lost fanout                            ;
+; register_unit:registros|Registros~233    ; Lost fanout                            ;
+; register_unit:registros|Registros~234    ; Lost fanout                            ;
+; register_unit:registros|Registros~235    ; Lost fanout                            ;
+; register_unit:registros|Registros~236    ; Lost fanout                            ;
+; register_unit:registros|Registros~237    ; Lost fanout                            ;
+; register_unit:registros|Registros~238    ; Lost fanout                            ;
+; register_unit:registros|Registros~239    ; Lost fanout                            ;
+; register_unit:registros|Registros~240    ; Lost fanout                            ;
+; register_unit:registros|Registros~241    ; Lost fanout                            ;
+; register_unit:registros|Registros~242    ; Lost fanout                            ;
+; register_unit:registros|Registros~243    ; Lost fanout                            ;
+; register_unit:registros|Registros~244    ; Lost fanout                            ;
+; register_unit:registros|Registros~245    ; Lost fanout                            ;
+; register_unit:registros|Registros~246    ; Lost fanout                            ;
+; register_unit:registros|Registros~247    ; Lost fanout                            ;
+; register_unit:registros|Registros~248    ; Lost fanout                            ;
+; register_unit:registros|Registros~249    ; Lost fanout                            ;
+; register_unit:registros|Registros~250    ; Lost fanout                            ;
+; register_unit:registros|Registros~251    ; Lost fanout                            ;
+; register_unit:registros|Registros~252    ; Lost fanout                            ;
+; register_unit:registros|Registros~253    ; Lost fanout                            ;
+; register_unit:registros|Registros~254    ; Lost fanout                            ;
+; register_unit:registros|Registros~255    ; Lost fanout                            ;
+; register_unit:registros|Registros~256    ; Lost fanout                            ;
+; register_unit:registros|Registros~257    ; Lost fanout                            ;
+; register_unit:registros|Registros~258    ; Lost fanout                            ;
+; register_unit:registros|Registros~259    ; Lost fanout                            ;
+; register_unit:registros|Registros~260    ; Lost fanout                            ;
+; register_unit:registros|Registros~261    ; Lost fanout                            ;
+; register_unit:registros|Registros~262    ; Lost fanout                            ;
+; register_unit:registros|Registros~263    ; Lost fanout                            ;
+; register_unit:registros|Registros~264    ; Lost fanout                            ;
+; register_unit:registros|Registros~265    ; Lost fanout                            ;
+; register_unit:registros|Registros~266    ; Lost fanout                            ;
+; register_unit:registros|Registros~267    ; Lost fanout                            ;
+; register_unit:registros|Registros~268    ; Lost fanout                            ;
+; register_unit:registros|Registros~269    ; Lost fanout                            ;
+; register_unit:registros|Registros~270    ; Lost fanout                            ;
+; register_unit:registros|Registros~271    ; Lost fanout                            ;
+; register_unit:registros|Registros~272    ; Lost fanout                            ;
+; register_unit:registros|Registros~273    ; Lost fanout                            ;
+; register_unit:registros|Registros~274    ; Lost fanout                            ;
+; register_unit:registros|Registros~275    ; Lost fanout                            ;
+; register_unit:registros|Registros~276    ; Lost fanout                            ;
+; register_unit:registros|Registros~277    ; Lost fanout                            ;
+; register_unit:registros|Registros~278    ; Lost fanout                            ;
+; register_unit:registros|Registros~279    ; Lost fanout                            ;
+; register_unit:registros|Registros~280    ; Lost fanout                            ;
+; register_unit:registros|Registros~281    ; Lost fanout                            ;
+; register_unit:registros|Registros~282    ; Lost fanout                            ;
+; register_unit:registros|Registros~283    ; Lost fanout                            ;
+; register_unit:registros|Registros~284    ; Lost fanout                            ;
+; register_unit:registros|Registros~285    ; Lost fanout                            ;
+; register_unit:registros|Registros~286    ; Lost fanout                            ;
+; register_unit:registros|Registros~287    ; Lost fanout                            ;
+; register_unit:registros|Registros~288    ; Lost fanout                            ;
+; register_unit:registros|Registros~289    ; Lost fanout                            ;
+; register_unit:registros|Registros~290    ; Lost fanout                            ;
+; register_unit:registros|Registros~291    ; Lost fanout                            ;
+; register_unit:registros|Registros~292    ; Lost fanout                            ;
+; register_unit:registros|Registros~293    ; Lost fanout                            ;
+; register_unit:registros|Registros~294    ; Lost fanout                            ;
+; register_unit:registros|Registros~295    ; Lost fanout                            ;
+; register_unit:registros|Registros~296    ; Lost fanout                            ;
+; register_unit:registros|Registros~297    ; Lost fanout                            ;
+; register_unit:registros|Registros~298    ; Lost fanout                            ;
+; register_unit:registros|Registros~299    ; Lost fanout                            ;
+; register_unit:registros|Registros~300    ; Lost fanout                            ;
+; register_unit:registros|Registros~301    ; Lost fanout                            ;
+; register_unit:registros|Registros~302    ; Lost fanout                            ;
+; register_unit:registros|Registros~303    ; Lost fanout                            ;
+; register_unit:registros|Registros~304    ; Lost fanout                            ;
+; register_unit:registros|Registros~305    ; Lost fanout                            ;
+; register_unit:registros|Registros~306    ; Lost fanout                            ;
+; register_unit:registros|Registros~307    ; Lost fanout                            ;
+; register_unit:registros|Registros~308    ; Lost fanout                            ;
+; register_unit:registros|Registros~309    ; Lost fanout                            ;
+; register_unit:registros|Registros~310    ; Lost fanout                            ;
+; register_unit:registros|Registros~311    ; Lost fanout                            ;
+; register_unit:registros|Registros~312    ; Lost fanout                            ;
+; register_unit:registros|Registros~313    ; Lost fanout                            ;
+; register_unit:registros|Registros~314    ; Lost fanout                            ;
+; register_unit:registros|Registros~315    ; Lost fanout                            ;
+; register_unit:registros|Registros~316    ; Lost fanout                            ;
+; register_unit:registros|Registros~317    ; Lost fanout                            ;
+; register_unit:registros|Registros~318    ; Lost fanout                            ;
+; register_unit:registros|Registros~319    ; Lost fanout                            ;
+; register_unit:registros|Registros~320    ; Lost fanout                            ;
+; register_unit:registros|Registros~321    ; Lost fanout                            ;
+; register_unit:registros|Registros~322    ; Lost fanout                            ;
+; register_unit:registros|Registros~323    ; Lost fanout                            ;
+; register_unit:registros|Registros~324    ; Lost fanout                            ;
+; register_unit:registros|Registros~325    ; Lost fanout                            ;
+; register_unit:registros|Registros~326    ; Lost fanout                            ;
+; register_unit:registros|Registros~327    ; Lost fanout                            ;
+; register_unit:registros|Registros~328    ; Lost fanout                            ;
+; register_unit:registros|Registros~329    ; Lost fanout                            ;
+; register_unit:registros|Registros~330    ; Lost fanout                            ;
+; register_unit:registros|Registros~331    ; Lost fanout                            ;
+; register_unit:registros|Registros~332    ; Lost fanout                            ;
+; register_unit:registros|Registros~333    ; Lost fanout                            ;
+; register_unit:registros|Registros~334    ; Lost fanout                            ;
+; register_unit:registros|Registros~335    ; Lost fanout                            ;
+; register_unit:registros|Registros~336    ; Lost fanout                            ;
+; register_unit:registros|Registros~337    ; Lost fanout                            ;
+; register_unit:registros|Registros~338    ; Lost fanout                            ;
+; register_unit:registros|Registros~339    ; Lost fanout                            ;
+; register_unit:registros|Registros~340    ; Lost fanout                            ;
+; register_unit:registros|Registros~341    ; Lost fanout                            ;
+; register_unit:registros|Registros~342    ; Lost fanout                            ;
+; register_unit:registros|Registros~343    ; Lost fanout                            ;
+; register_unit:registros|Registros~344    ; Lost fanout                            ;
+; register_unit:registros|Registros~345    ; Lost fanout                            ;
+; register_unit:registros|Registros~346    ; Lost fanout                            ;
+; register_unit:registros|Registros~347    ; Lost fanout                            ;
+; register_unit:registros|Registros~348    ; Lost fanout                            ;
+; register_unit:registros|Registros~349    ; Lost fanout                            ;
+; register_unit:registros|Registros~350    ; Lost fanout                            ;
+; register_unit:registros|Registros~351    ; Lost fanout                            ;
+; register_unit:registros|Registros~352    ; Lost fanout                            ;
+; register_unit:registros|Registros~353    ; Lost fanout                            ;
+; register_unit:registros|Registros~354    ; Lost fanout                            ;
+; register_unit:registros|Registros~355    ; Lost fanout                            ;
+; register_unit:registros|Registros~356    ; Lost fanout                            ;
+; register_unit:registros|Registros~357    ; Lost fanout                            ;
+; register_unit:registros|Registros~358    ; Lost fanout                            ;
+; register_unit:registros|Registros~359    ; Lost fanout                            ;
+; register_unit:registros|Registros~360    ; Lost fanout                            ;
+; register_unit:registros|Registros~361    ; Lost fanout                            ;
+; register_unit:registros|Registros~362    ; Lost fanout                            ;
+; register_unit:registros|Registros~363    ; Lost fanout                            ;
+; register_unit:registros|Registros~364    ; Lost fanout                            ;
+; register_unit:registros|Registros~365    ; Lost fanout                            ;
+; register_unit:registros|Registros~366    ; Lost fanout                            ;
+; register_unit:registros|Registros~367    ; Lost fanout                            ;
+; register_unit:registros|Registros~368    ; Lost fanout                            ;
+; register_unit:registros|Registros~369    ; Lost fanout                            ;
+; register_unit:registros|Registros~370    ; Lost fanout                            ;
+; register_unit:registros|Registros~371    ; Lost fanout                            ;
+; register_unit:registros|Registros~372    ; Lost fanout                            ;
+; register_unit:registros|Registros~373    ; Lost fanout                            ;
+; register_unit:registros|Registros~374    ; Lost fanout                            ;
+; register_unit:registros|Registros~375    ; Lost fanout                            ;
+; register_unit:registros|Registros~376    ; Lost fanout                            ;
+; register_unit:registros|Registros~377    ; Lost fanout                            ;
+; register_unit:registros|Registros~378    ; Lost fanout                            ;
+; register_unit:registros|Registros~379    ; Lost fanout                            ;
+; register_unit:registros|Registros~380    ; Lost fanout                            ;
+; register_unit:registros|Registros~381    ; Lost fanout                            ;
+; register_unit:registros|Registros~382    ; Lost fanout                            ;
+; register_unit:registros|Registros~383    ; Lost fanout                            ;
+; register_unit:registros|Registros~384    ; Lost fanout                            ;
+; register_unit:registros|Registros~385    ; Lost fanout                            ;
+; register_unit:registros|Registros~386    ; Lost fanout                            ;
+; register_unit:registros|Registros~387    ; Lost fanout                            ;
+; register_unit:registros|Registros~388    ; Lost fanout                            ;
+; register_unit:registros|Registros~389    ; Lost fanout                            ;
+; register_unit:registros|Registros~390    ; Lost fanout                            ;
+; register_unit:registros|Registros~391    ; Lost fanout                            ;
+; register_unit:registros|Registros~392    ; Lost fanout                            ;
+; register_unit:registros|Registros~393    ; Lost fanout                            ;
+; register_unit:registros|Registros~394    ; Lost fanout                            ;
+; register_unit:registros|Registros~395    ; Lost fanout                            ;
+; register_unit:registros|Registros~396    ; Lost fanout                            ;
+; register_unit:registros|Registros~397    ; Lost fanout                            ;
+; register_unit:registros|Registros~398    ; Lost fanout                            ;
+; register_unit:registros|Registros~399    ; Lost fanout                            ;
+; register_unit:registros|Registros~400    ; Lost fanout                            ;
+; register_unit:registros|Registros~401    ; Lost fanout                            ;
+; register_unit:registros|Registros~402    ; Lost fanout                            ;
+; register_unit:registros|Registros~403    ; Lost fanout                            ;
+; register_unit:registros|Registros~404    ; Lost fanout                            ;
+; register_unit:registros|Registros~405    ; Lost fanout                            ;
+; register_unit:registros|Registros~406    ; Lost fanout                            ;
+; register_unit:registros|Registros~407    ; Lost fanout                            ;
+; register_unit:registros|Registros~408    ; Lost fanout                            ;
+; register_unit:registros|Registros~409    ; Lost fanout                            ;
+; register_unit:registros|Registros~410    ; Lost fanout                            ;
+; register_unit:registros|Registros~411    ; Lost fanout                            ;
+; register_unit:registros|Registros~412    ; Lost fanout                            ;
+; register_unit:registros|Registros~413    ; Lost fanout                            ;
+; register_unit:registros|Registros~414    ; Lost fanout                            ;
+; register_unit:registros|Registros~415    ; Lost fanout                            ;
+; register_unit:registros|Registros~416    ; Lost fanout                            ;
+; register_unit:registros|Registros~417    ; Lost fanout                            ;
+; register_unit:registros|Registros~418    ; Lost fanout                            ;
+; register_unit:registros|Registros~419    ; Lost fanout                            ;
+; register_unit:registros|Registros~420    ; Lost fanout                            ;
+; register_unit:registros|Registros~421    ; Lost fanout                            ;
+; register_unit:registros|Registros~422    ; Lost fanout                            ;
+; register_unit:registros|Registros~423    ; Lost fanout                            ;
+; register_unit:registros|Registros~424    ; Lost fanout                            ;
+; register_unit:registros|Registros~425    ; Lost fanout                            ;
+; register_unit:registros|Registros~426    ; Lost fanout                            ;
+; register_unit:registros|Registros~427    ; Lost fanout                            ;
+; register_unit:registros|Registros~428    ; Lost fanout                            ;
+; register_unit:registros|Registros~429    ; Lost fanout                            ;
+; register_unit:registros|Registros~430    ; Lost fanout                            ;
+; register_unit:registros|Registros~431    ; Lost fanout                            ;
+; register_unit:registros|Registros~432    ; Lost fanout                            ;
+; register_unit:registros|Registros~433    ; Lost fanout                            ;
+; register_unit:registros|Registros~434    ; Lost fanout                            ;
+; register_unit:registros|Registros~435    ; Lost fanout                            ;
+; register_unit:registros|Registros~436    ; Lost fanout                            ;
+; register_unit:registros|Registros~437    ; Lost fanout                            ;
+; register_unit:registros|Registros~438    ; Lost fanout                            ;
+; register_unit:registros|Registros~439    ; Lost fanout                            ;
+; register_unit:registros|Registros~440    ; Lost fanout                            ;
+; register_unit:registros|Registros~441    ; Lost fanout                            ;
+; register_unit:registros|Registros~442    ; Lost fanout                            ;
+; register_unit:registros|Registros~443    ; Lost fanout                            ;
+; register_unit:registros|Registros~444    ; Lost fanout                            ;
+; register_unit:registros|Registros~445    ; Lost fanout                            ;
+; register_unit:registros|Registros~446    ; Lost fanout                            ;
+; register_unit:registros|Registros~447    ; Lost fanout                            ;
+; register_unit:registros|Registros~448    ; Lost fanout                            ;
+; register_unit:registros|Registros~449    ; Lost fanout                            ;
+; register_unit:registros|Registros~450    ; Lost fanout                            ;
+; register_unit:registros|Registros~451    ; Lost fanout                            ;
+; register_unit:registros|Registros~452    ; Lost fanout                            ;
+; register_unit:registros|Registros~453    ; Lost fanout                            ;
+; register_unit:registros|Registros~454    ; Lost fanout                            ;
+; register_unit:registros|Registros~455    ; Lost fanout                            ;
+; register_unit:registros|Registros~456    ; Lost fanout                            ;
+; register_unit:registros|Registros~457    ; Lost fanout                            ;
+; register_unit:registros|Registros~458    ; Lost fanout                            ;
+; register_unit:registros|Registros~459    ; Lost fanout                            ;
+; register_unit:registros|Registros~460    ; Lost fanout                            ;
+; register_unit:registros|Registros~461    ; Lost fanout                            ;
+; register_unit:registros|Registros~462    ; Lost fanout                            ;
+; register_unit:registros|Registros~463    ; Lost fanout                            ;
+; register_unit:registros|Registros~464    ; Lost fanout                            ;
+; register_unit:registros|Registros~465    ; Lost fanout                            ;
+; register_unit:registros|Registros~466    ; Lost fanout                            ;
+; register_unit:registros|Registros~467    ; Lost fanout                            ;
+; register_unit:registros|Registros~468    ; Lost fanout                            ;
+; register_unit:registros|Registros~469    ; Lost fanout                            ;
+; register_unit:registros|Registros~470    ; Lost fanout                            ;
+; register_unit:registros|Registros~471    ; Lost fanout                            ;
+; register_unit:registros|Registros~472    ; Lost fanout                            ;
+; register_unit:registros|Registros~473    ; Lost fanout                            ;
+; register_unit:registros|Registros~474    ; Lost fanout                            ;
+; register_unit:registros|Registros~475    ; Lost fanout                            ;
+; register_unit:registros|Registros~476    ; Lost fanout                            ;
+; register_unit:registros|Registros~477    ; Lost fanout                            ;
+; register_unit:registros|Registros~478    ; Lost fanout                            ;
+; register_unit:registros|Registros~479    ; Lost fanout                            ;
+; register_unit:registros|Registros~480    ; Lost fanout                            ;
+; register_unit:registros|Registros~481    ; Lost fanout                            ;
+; register_unit:registros|Registros~482    ; Lost fanout                            ;
+; register_unit:registros|Registros~483    ; Lost fanout                            ;
+; register_unit:registros|Registros~484    ; Lost fanout                            ;
+; register_unit:registros|Registros~485    ; Lost fanout                            ;
+; register_unit:registros|Registros~486    ; Lost fanout                            ;
+; register_unit:registros|Registros~487    ; Lost fanout                            ;
+; register_unit:registros|Registros~488    ; Lost fanout                            ;
+; register_unit:registros|Registros~489    ; Lost fanout                            ;
+; register_unit:registros|Registros~490    ; Lost fanout                            ;
+; register_unit:registros|Registros~491    ; Lost fanout                            ;
+; register_unit:registros|Registros~492    ; Lost fanout                            ;
+; register_unit:registros|Registros~493    ; Lost fanout                            ;
+; register_unit:registros|Registros~494    ; Lost fanout                            ;
+; register_unit:registros|Registros~495    ; Lost fanout                            ;
+; register_unit:registros|Registros~496    ; Lost fanout                            ;
+; register_unit:registros|Registros~497    ; Lost fanout                            ;
+; register_unit:registros|Registros~498    ; Lost fanout                            ;
+; register_unit:registros|Registros~499    ; Lost fanout                            ;
+; register_unit:registros|Registros~500    ; Lost fanout                            ;
+; register_unit:registros|Registros~501    ; Lost fanout                            ;
+; register_unit:registros|Registros~502    ; Lost fanout                            ;
+; register_unit:registros|Registros~503    ; Lost fanout                            ;
+; register_unit:registros|Registros~504    ; Lost fanout                            ;
+; register_unit:registros|Registros~505    ; Lost fanout                            ;
+; register_unit:registros|Registros~506    ; Lost fanout                            ;
+; register_unit:registros|Registros~507    ; Lost fanout                            ;
+; register_unit:registros|Registros~508    ; Lost fanout                            ;
+; register_unit:registros|Registros~509    ; Lost fanout                            ;
+; register_unit:registros|Registros~510    ; Lost fanout                            ;
+; register_unit:registros|Registros~511    ; Lost fanout                            ;
+; register_unit:registros|Registros~512    ; Lost fanout                            ;
+; register_unit:registros|Registros~513    ; Lost fanout                            ;
+; register_unit:registros|Registros~514    ; Lost fanout                            ;
+; register_unit:registros|Registros~515    ; Lost fanout                            ;
+; register_unit:registros|Registros~516    ; Lost fanout                            ;
+; register_unit:registros|Registros~517    ; Lost fanout                            ;
+; register_unit:registros|Registros~518    ; Lost fanout                            ;
+; register_unit:registros|Registros~519    ; Lost fanout                            ;
+; register_unit:registros|Registros~520    ; Lost fanout                            ;
+; register_unit:registros|Registros~521    ; Lost fanout                            ;
+; register_unit:registros|Registros~522    ; Lost fanout                            ;
+; register_unit:registros|Registros~523    ; Lost fanout                            ;
+; register_unit:registros|Registros~524    ; Lost fanout                            ;
+; register_unit:registros|Registros~525    ; Lost fanout                            ;
+; register_unit:registros|Registros~526    ; Lost fanout                            ;
+; register_unit:registros|Registros~527    ; Lost fanout                            ;
+; register_unit:registros|Registros~528    ; Lost fanout                            ;
+; register_unit:registros|Registros~529    ; Lost fanout                            ;
+; register_unit:registros|Registros~530    ; Lost fanout                            ;
+; register_unit:registros|Registros~531    ; Lost fanout                            ;
+; register_unit:registros|Registros~532    ; Lost fanout                            ;
+; register_unit:registros|Registros~533    ; Lost fanout                            ;
+; register_unit:registros|Registros~534    ; Lost fanout                            ;
+; register_unit:registros|Registros~535    ; Lost fanout                            ;
+; register_unit:registros|Registros~536    ; Lost fanout                            ;
+; register_unit:registros|Registros~537    ; Lost fanout                            ;
+; register_unit:registros|Registros~538    ; Lost fanout                            ;
+; register_unit:registros|Registros~539    ; Lost fanout                            ;
+; register_unit:registros|Registros~540    ; Lost fanout                            ;
+; register_unit:registros|Registros~541    ; Lost fanout                            ;
+; register_unit:registros|Registros~542    ; Lost fanout                            ;
+; register_unit:registros|Registros~543    ; Lost fanout                            ;
+; register_unit:registros|Registros~544    ; Lost fanout                            ;
+; register_unit:registros|Registros~545    ; Lost fanout                            ;
+; register_unit:registros|Registros~546    ; Lost fanout                            ;
+; register_unit:registros|Registros~547    ; Lost fanout                            ;
+; register_unit:registros|Registros~548    ; Lost fanout                            ;
+; register_unit:registros|Registros~549    ; Lost fanout                            ;
+; register_unit:registros|Registros~550    ; Lost fanout                            ;
+; register_unit:registros|Registros~551    ; Lost fanout                            ;
+; register_unit:registros|Registros~552    ; Lost fanout                            ;
+; register_unit:registros|Registros~553    ; Lost fanout                            ;
+; register_unit:registros|Registros~554    ; Lost fanout                            ;
+; register_unit:registros|Registros~555    ; Lost fanout                            ;
+; register_unit:registros|Registros~556    ; Lost fanout                            ;
+; register_unit:registros|Registros~557    ; Lost fanout                            ;
+; register_unit:registros|Registros~558    ; Lost fanout                            ;
+; register_unit:registros|Registros~559    ; Lost fanout                            ;
+; register_unit:registros|Registros~560    ; Lost fanout                            ;
+; register_unit:registros|Registros~561    ; Lost fanout                            ;
+; register_unit:registros|Registros~562    ; Lost fanout                            ;
+; register_unit:registros|Registros~563    ; Lost fanout                            ;
+; register_unit:registros|Registros~564    ; Lost fanout                            ;
+; register_unit:registros|Registros~565    ; Lost fanout                            ;
+; register_unit:registros|Registros~566    ; Lost fanout                            ;
+; register_unit:registros|Registros~567    ; Lost fanout                            ;
+; register_unit:registros|Registros~568    ; Lost fanout                            ;
+; register_unit:registros|Registros~569    ; Lost fanout                            ;
+; register_unit:registros|Registros~570    ; Lost fanout                            ;
+; register_unit:registros|Registros~571    ; Lost fanout                            ;
+; register_unit:registros|Registros~572    ; Lost fanout                            ;
+; register_unit:registros|Registros~573    ; Lost fanout                            ;
+; register_unit:registros|Registros~574    ; Lost fanout                            ;
+; register_unit:registros|Registros~575    ; Lost fanout                            ;
+; register_unit:registros|Registros~576    ; Lost fanout                            ;
+; register_unit:registros|Registros~577    ; Lost fanout                            ;
+; register_unit:registros|Registros~578    ; Lost fanout                            ;
+; register_unit:registros|Registros~579    ; Lost fanout                            ;
+; register_unit:registros|Registros~580    ; Lost fanout                            ;
+; register_unit:registros|Registros~581    ; Lost fanout                            ;
+; register_unit:registros|Registros~582    ; Lost fanout                            ;
+; register_unit:registros|Registros~583    ; Lost fanout                            ;
+; register_unit:registros|Registros~584    ; Lost fanout                            ;
+; register_unit:registros|Registros~585    ; Lost fanout                            ;
+; register_unit:registros|Registros~586    ; Lost fanout                            ;
+; register_unit:registros|Registros~587    ; Lost fanout                            ;
+; register_unit:registros|Registros~588    ; Lost fanout                            ;
+; register_unit:registros|Registros~589    ; Lost fanout                            ;
+; register_unit:registros|Registros~590    ; Lost fanout                            ;
+; register_unit:registros|Registros~591    ; Lost fanout                            ;
+; register_unit:registros|Registros~592    ; Lost fanout                            ;
+; register_unit:registros|Registros~593    ; Lost fanout                            ;
+; register_unit:registros|Registros~594    ; Lost fanout                            ;
+; register_unit:registros|Registros~595    ; Lost fanout                            ;
+; register_unit:registros|Registros~596    ; Lost fanout                            ;
+; register_unit:registros|Registros~597    ; Lost fanout                            ;
+; register_unit:registros|Registros~598    ; Lost fanout                            ;
+; register_unit:registros|Registros~599    ; Lost fanout                            ;
+; register_unit:registros|Registros~600    ; Lost fanout                            ;
+; register_unit:registros|Registros~601    ; Lost fanout                            ;
+; register_unit:registros|Registros~602    ; Lost fanout                            ;
+; register_unit:registros|Registros~603    ; Lost fanout                            ;
+; register_unit:registros|Registros~604    ; Lost fanout                            ;
+; register_unit:registros|Registros~605    ; Lost fanout                            ;
+; register_unit:registros|Registros~606    ; Lost fanout                            ;
+; register_unit:registros|Registros~607    ; Lost fanout                            ;
+; register_unit:registros|Registros~608    ; Lost fanout                            ;
+; register_unit:registros|Registros~609    ; Lost fanout                            ;
+; register_unit:registros|Registros~610    ; Lost fanout                            ;
+; register_unit:registros|Registros~611    ; Lost fanout                            ;
+; register_unit:registros|Registros~612    ; Lost fanout                            ;
+; register_unit:registros|Registros~613    ; Lost fanout                            ;
+; register_unit:registros|Registros~614    ; Lost fanout                            ;
+; register_unit:registros|Registros~615    ; Lost fanout                            ;
+; register_unit:registros|Registros~616    ; Lost fanout                            ;
+; register_unit:registros|Registros~617    ; Lost fanout                            ;
+; register_unit:registros|Registros~618    ; Lost fanout                            ;
+; register_unit:registros|Registros~619    ; Lost fanout                            ;
+; register_unit:registros|Registros~620    ; Lost fanout                            ;
+; register_unit:registros|Registros~621    ; Lost fanout                            ;
+; register_unit:registros|Registros~622    ; Lost fanout                            ;
+; register_unit:registros|Registros~623    ; Lost fanout                            ;
+; register_unit:registros|Registros~624    ; Lost fanout                            ;
+; register_unit:registros|Registros~625    ; Lost fanout                            ;
+; register_unit:registros|Registros~626    ; Lost fanout                            ;
+; register_unit:registros|Registros~627    ; Lost fanout                            ;
+; register_unit:registros|Registros~628    ; Lost fanout                            ;
+; register_unit:registros|Registros~629    ; Lost fanout                            ;
+; register_unit:registros|Registros~630    ; Lost fanout                            ;
+; register_unit:registros|Registros~631    ; Lost fanout                            ;
+; register_unit:registros|Registros~632    ; Lost fanout                            ;
+; register_unit:registros|Registros~633    ; Lost fanout                            ;
+; register_unit:registros|Registros~634    ; Lost fanout                            ;
+; register_unit:registros|Registros~635    ; Lost fanout                            ;
+; register_unit:registros|Registros~636    ; Lost fanout                            ;
+; register_unit:registros|Registros~637    ; Lost fanout                            ;
+; register_unit:registros|Registros~638    ; Lost fanout                            ;
+; register_unit:registros|Registros~639    ; Lost fanout                            ;
+; register_unit:registros|Registros~640    ; Lost fanout                            ;
+; register_unit:registros|Registros~641    ; Lost fanout                            ;
+; register_unit:registros|Registros~642    ; Lost fanout                            ;
+; register_unit:registros|Registros~643    ; Lost fanout                            ;
+; register_unit:registros|Registros~644    ; Lost fanout                            ;
+; register_unit:registros|Registros~645    ; Lost fanout                            ;
+; register_unit:registros|Registros~646    ; Lost fanout                            ;
+; register_unit:registros|Registros~647    ; Lost fanout                            ;
+; register_unit:registros|Registros~648    ; Lost fanout                            ;
+; register_unit:registros|Registros~649    ; Lost fanout                            ;
+; register_unit:registros|Registros~650    ; Lost fanout                            ;
+; register_unit:registros|Registros~651    ; Lost fanout                            ;
+; register_unit:registros|Registros~652    ; Lost fanout                            ;
+; register_unit:registros|Registros~653    ; Lost fanout                            ;
+; register_unit:registros|Registros~654    ; Lost fanout                            ;
+; register_unit:registros|Registros~655    ; Lost fanout                            ;
+; register_unit:registros|Registros~656    ; Lost fanout                            ;
+; register_unit:registros|Registros~657    ; Lost fanout                            ;
+; register_unit:registros|Registros~658    ; Lost fanout                            ;
+; register_unit:registros|Registros~659    ; Lost fanout                            ;
+; register_unit:registros|Registros~660    ; Lost fanout                            ;
+; register_unit:registros|Registros~661    ; Lost fanout                            ;
+; register_unit:registros|Registros~662    ; Lost fanout                            ;
+; register_unit:registros|Registros~663    ; Lost fanout                            ;
+; register_unit:registros|Registros~664    ; Lost fanout                            ;
+; register_unit:registros|Registros~665    ; Lost fanout                            ;
+; register_unit:registros|Registros~666    ; Lost fanout                            ;
+; register_unit:registros|Registros~667    ; Lost fanout                            ;
+; register_unit:registros|Registros~668    ; Lost fanout                            ;
+; register_unit:registros|Registros~669    ; Lost fanout                            ;
+; register_unit:registros|Registros~670    ; Lost fanout                            ;
+; register_unit:registros|Registros~671    ; Lost fanout                            ;
+; register_unit:registros|Registros~672    ; Lost fanout                            ;
+; register_unit:registros|Registros~673    ; Lost fanout                            ;
+; register_unit:registros|Registros~674    ; Lost fanout                            ;
+; register_unit:registros|Registros~675    ; Lost fanout                            ;
+; register_unit:registros|Registros~676    ; Lost fanout                            ;
+; register_unit:registros|Registros~677    ; Lost fanout                            ;
+; register_unit:registros|Registros~678    ; Lost fanout                            ;
+; register_unit:registros|Registros~679    ; Lost fanout                            ;
+; register_unit:registros|Registros~680    ; Lost fanout                            ;
+; register_unit:registros|Registros~681    ; Lost fanout                            ;
+; register_unit:registros|Registros~682    ; Lost fanout                            ;
+; register_unit:registros|Registros~683    ; Lost fanout                            ;
+; register_unit:registros|Registros~684    ; Lost fanout                            ;
+; register_unit:registros|Registros~685    ; Lost fanout                            ;
+; register_unit:registros|Registros~686    ; Lost fanout                            ;
+; register_unit:registros|Registros~687    ; Lost fanout                            ;
+; register_unit:registros|Registros~688    ; Lost fanout                            ;
+; register_unit:registros|Registros~689    ; Lost fanout                            ;
+; register_unit:registros|Registros~690    ; Lost fanout                            ;
+; register_unit:registros|Registros~691    ; Lost fanout                            ;
+; register_unit:registros|Registros~692    ; Lost fanout                            ;
+; register_unit:registros|Registros~693    ; Lost fanout                            ;
+; register_unit:registros|Registros~694    ; Lost fanout                            ;
+; register_unit:registros|Registros~695    ; Lost fanout                            ;
+; register_unit:registros|Registros~696    ; Lost fanout                            ;
+; register_unit:registros|Registros~697    ; Lost fanout                            ;
+; register_unit:registros|Registros~698    ; Lost fanout                            ;
+; register_unit:registros|Registros~699    ; Lost fanout                            ;
+; register_unit:registros|Registros~700    ; Lost fanout                            ;
+; register_unit:registros|Registros~701    ; Lost fanout                            ;
+; register_unit:registros|Registros~702    ; Lost fanout                            ;
+; register_unit:registros|Registros~703    ; Lost fanout                            ;
+; register_unit:registros|Registros~704    ; Lost fanout                            ;
+; register_unit:registros|Registros~705    ; Lost fanout                            ;
+; register_unit:registros|Registros~706    ; Lost fanout                            ;
+; register_unit:registros|Registros~707    ; Lost fanout                            ;
+; register_unit:registros|Registros~708    ; Lost fanout                            ;
+; register_unit:registros|Registros~709    ; Lost fanout                            ;
+; register_unit:registros|Registros~710    ; Lost fanout                            ;
+; register_unit:registros|Registros~711    ; Lost fanout                            ;
+; register_unit:registros|Registros~712    ; Lost fanout                            ;
+; register_unit:registros|Registros~713    ; Lost fanout                            ;
+; register_unit:registros|Registros~714    ; Lost fanout                            ;
+; register_unit:registros|Registros~715    ; Lost fanout                            ;
+; register_unit:registros|Registros~716    ; Lost fanout                            ;
+; register_unit:registros|Registros~717    ; Lost fanout                            ;
+; register_unit:registros|Registros~718    ; Lost fanout                            ;
+; register_unit:registros|Registros~719    ; Lost fanout                            ;
+; register_unit:registros|Registros~720    ; Lost fanout                            ;
+; register_unit:registros|Registros~721    ; Lost fanout                            ;
+; register_unit:registros|Registros~722    ; Lost fanout                            ;
+; register_unit:registros|Registros~723    ; Lost fanout                            ;
+; register_unit:registros|Registros~724    ; Lost fanout                            ;
+; register_unit:registros|Registros~725    ; Lost fanout                            ;
+; register_unit:registros|Registros~726    ; Lost fanout                            ;
+; register_unit:registros|Registros~727    ; Lost fanout                            ;
+; register_unit:registros|Registros~728    ; Lost fanout                            ;
+; register_unit:registros|Registros~729    ; Lost fanout                            ;
+; register_unit:registros|Registros~730    ; Lost fanout                            ;
+; register_unit:registros|Registros~731    ; Lost fanout                            ;
+; register_unit:registros|Registros~732    ; Lost fanout                            ;
+; register_unit:registros|Registros~733    ; Lost fanout                            ;
+; register_unit:registros|Registros~734    ; Lost fanout                            ;
+; register_unit:registros|Registros~735    ; Lost fanout                            ;
+; register_unit:registros|Registros~736    ; Lost fanout                            ;
+; register_unit:registros|Registros~737    ; Lost fanout                            ;
+; register_unit:registros|Registros~738    ; Lost fanout                            ;
+; register_unit:registros|Registros~739    ; Lost fanout                            ;
+; register_unit:registros|Registros~740    ; Lost fanout                            ;
+; register_unit:registros|Registros~741    ; Lost fanout                            ;
+; register_unit:registros|Registros~742    ; Lost fanout                            ;
+; register_unit:registros|Registros~743    ; Lost fanout                            ;
+; register_unit:registros|Registros~744    ; Lost fanout                            ;
+; register_unit:registros|Registros~745    ; Lost fanout                            ;
+; register_unit:registros|Registros~746    ; Lost fanout                            ;
+; register_unit:registros|Registros~747    ; Lost fanout                            ;
+; register_unit:registros|Registros~748    ; Lost fanout                            ;
+; register_unit:registros|Registros~749    ; Lost fanout                            ;
+; register_unit:registros|Registros~750    ; Lost fanout                            ;
+; register_unit:registros|Registros~751    ; Lost fanout                            ;
+; register_unit:registros|Registros~752    ; Lost fanout                            ;
+; register_unit:registros|Registros~753    ; Lost fanout                            ;
+; register_unit:registros|Registros~754    ; Lost fanout                            ;
+; register_unit:registros|Registros~755    ; Lost fanout                            ;
+; register_unit:registros|Registros~756    ; Lost fanout                            ;
+; register_unit:registros|Registros~757    ; Lost fanout                            ;
+; register_unit:registros|Registros~758    ; Lost fanout                            ;
+; register_unit:registros|Registros~759    ; Lost fanout                            ;
+; register_unit:registros|Registros~760    ; Lost fanout                            ;
+; register_unit:registros|Registros~761    ; Lost fanout                            ;
+; register_unit:registros|Registros~762    ; Lost fanout                            ;
+; register_unit:registros|Registros~763    ; Lost fanout                            ;
+; register_unit:registros|Registros~764    ; Lost fanout                            ;
+; register_unit:registros|Registros~765    ; Lost fanout                            ;
+; register_unit:registros|Registros~766    ; Lost fanout                            ;
+; register_unit:registros|Registros~767    ; Lost fanout                            ;
+; register_unit:registros|Registros~768    ; Lost fanout                            ;
+; register_unit:registros|Registros~769    ; Lost fanout                            ;
+; register_unit:registros|Registros~770    ; Lost fanout                            ;
+; register_unit:registros|Registros~771    ; Lost fanout                            ;
+; register_unit:registros|Registros~772    ; Lost fanout                            ;
+; register_unit:registros|Registros~773    ; Lost fanout                            ;
+; register_unit:registros|Registros~774    ; Lost fanout                            ;
+; register_unit:registros|Registros~775    ; Lost fanout                            ;
+; register_unit:registros|Registros~776    ; Lost fanout                            ;
+; register_unit:registros|Registros~777    ; Lost fanout                            ;
+; register_unit:registros|Registros~778    ; Lost fanout                            ;
+; register_unit:registros|Registros~779    ; Lost fanout                            ;
+; register_unit:registros|Registros~780    ; Lost fanout                            ;
+; register_unit:registros|Registros~781    ; Lost fanout                            ;
+; register_unit:registros|Registros~782    ; Lost fanout                            ;
+; register_unit:registros|Registros~783    ; Lost fanout                            ;
+; register_unit:registros|Registros~784    ; Lost fanout                            ;
+; register_unit:registros|Registros~785    ; Lost fanout                            ;
+; register_unit:registros|Registros~786    ; Lost fanout                            ;
+; register_unit:registros|Registros~787    ; Lost fanout                            ;
+; register_unit:registros|Registros~788    ; Lost fanout                            ;
+; register_unit:registros|Registros~789    ; Lost fanout                            ;
+; register_unit:registros|Registros~790    ; Lost fanout                            ;
+; register_unit:registros|Registros~791    ; Lost fanout                            ;
+; register_unit:registros|Registros~792    ; Lost fanout                            ;
+; register_unit:registros|Registros~793    ; Lost fanout                            ;
+; register_unit:registros|Registros~794    ; Lost fanout                            ;
+; register_unit:registros|Registros~795    ; Lost fanout                            ;
+; register_unit:registros|Registros~796    ; Lost fanout                            ;
+; register_unit:registros|Registros~797    ; Lost fanout                            ;
+; register_unit:registros|Registros~798    ; Lost fanout                            ;
+; register_unit:registros|Registros~799    ; Lost fanout                            ;
+; register_unit:registros|Registros~800    ; Lost fanout                            ;
+; register_unit:registros|Registros~801    ; Lost fanout                            ;
+; register_unit:registros|Registros~802    ; Lost fanout                            ;
+; register_unit:registros|Registros~803    ; Lost fanout                            ;
+; register_unit:registros|Registros~804    ; Lost fanout                            ;
+; register_unit:registros|Registros~805    ; Lost fanout                            ;
+; register_unit:registros|Registros~806    ; Lost fanout                            ;
+; register_unit:registros|Registros~807    ; Lost fanout                            ;
+; register_unit:registros|Registros~808    ; Lost fanout                            ;
+; register_unit:registros|Registros~809    ; Lost fanout                            ;
+; register_unit:registros|Registros~810    ; Lost fanout                            ;
+; register_unit:registros|Registros~811    ; Lost fanout                            ;
+; register_unit:registros|Registros~812    ; Lost fanout                            ;
+; register_unit:registros|Registros~813    ; Lost fanout                            ;
+; register_unit:registros|Registros~814    ; Lost fanout                            ;
+; register_unit:registros|Registros~815    ; Lost fanout                            ;
+; register_unit:registros|Registros~816    ; Lost fanout                            ;
+; register_unit:registros|Registros~817    ; Lost fanout                            ;
+; register_unit:registros|Registros~818    ; Lost fanout                            ;
+; register_unit:registros|Registros~819    ; Lost fanout                            ;
+; register_unit:registros|Registros~820    ; Lost fanout                            ;
+; register_unit:registros|Registros~821    ; Lost fanout                            ;
+; register_unit:registros|Registros~822    ; Lost fanout                            ;
+; register_unit:registros|Registros~823    ; Lost fanout                            ;
+; register_unit:registros|Registros~824    ; Lost fanout                            ;
+; register_unit:registros|Registros~825    ; Lost fanout                            ;
+; register_unit:registros|Registros~826    ; Lost fanout                            ;
+; register_unit:registros|Registros~827    ; Lost fanout                            ;
+; register_unit:registros|Registros~828    ; Lost fanout                            ;
+; register_unit:registros|Registros~829    ; Lost fanout                            ;
+; register_unit:registros|Registros~830    ; Lost fanout                            ;
+; register_unit:registros|Registros~831    ; Lost fanout                            ;
+; register_unit:registros|Registros~832    ; Lost fanout                            ;
+; register_unit:registros|Registros~833    ; Lost fanout                            ;
+; register_unit:registros|Registros~834    ; Lost fanout                            ;
+; register_unit:registros|Registros~835    ; Lost fanout                            ;
+; register_unit:registros|Registros~836    ; Lost fanout                            ;
+; register_unit:registros|Registros~837    ; Lost fanout                            ;
+; register_unit:registros|Registros~838    ; Lost fanout                            ;
+; register_unit:registros|Registros~839    ; Lost fanout                            ;
+; register_unit:registros|Registros~840    ; Lost fanout                            ;
+; register_unit:registros|Registros~841    ; Lost fanout                            ;
+; register_unit:registros|Registros~842    ; Lost fanout                            ;
+; register_unit:registros|Registros~843    ; Lost fanout                            ;
+; register_unit:registros|Registros~844    ; Lost fanout                            ;
+; register_unit:registros|Registros~845    ; Lost fanout                            ;
+; register_unit:registros|Registros~846    ; Lost fanout                            ;
+; register_unit:registros|Registros~847    ; Lost fanout                            ;
+; register_unit:registros|Registros~848    ; Lost fanout                            ;
+; register_unit:registros|Registros~849    ; Lost fanout                            ;
+; register_unit:registros|Registros~850    ; Lost fanout                            ;
+; register_unit:registros|Registros~851    ; Lost fanout                            ;
+; register_unit:registros|Registros~852    ; Lost fanout                            ;
+; register_unit:registros|Registros~853    ; Lost fanout                            ;
+; register_unit:registros|Registros~854    ; Lost fanout                            ;
+; register_unit:registros|Registros~855    ; Lost fanout                            ;
+; register_unit:registros|Registros~856    ; Lost fanout                            ;
+; register_unit:registros|Registros~857    ; Lost fanout                            ;
+; register_unit:registros|Registros~858    ; Lost fanout                            ;
+; register_unit:registros|Registros~859    ; Lost fanout                            ;
+; register_unit:registros|Registros~860    ; Lost fanout                            ;
+; register_unit:registros|Registros~861    ; Lost fanout                            ;
+; register_unit:registros|Registros~862    ; Lost fanout                            ;
+; register_unit:registros|Registros~863    ; Lost fanout                            ;
+; register_unit:registros|Registros~864    ; Lost fanout                            ;
+; register_unit:registros|Registros~865    ; Lost fanout                            ;
+; register_unit:registros|Registros~866    ; Lost fanout                            ;
+; register_unit:registros|Registros~867    ; Lost fanout                            ;
+; register_unit:registros|Registros~868    ; Lost fanout                            ;
+; register_unit:registros|Registros~869    ; Lost fanout                            ;
+; register_unit:registros|Registros~870    ; Lost fanout                            ;
+; register_unit:registros|Registros~871    ; Lost fanout                            ;
+; register_unit:registros|Registros~872    ; Lost fanout                            ;
+; register_unit:registros|Registros~873    ; Lost fanout                            ;
+; register_unit:registros|Registros~874    ; Lost fanout                            ;
+; register_unit:registros|Registros~875    ; Lost fanout                            ;
+; register_unit:registros|Registros~876    ; Lost fanout                            ;
+; register_unit:registros|Registros~877    ; Lost fanout                            ;
+; register_unit:registros|Registros~878    ; Lost fanout                            ;
+; register_unit:registros|Registros~879    ; Lost fanout                            ;
+; register_unit:registros|Registros~880    ; Lost fanout                            ;
+; register_unit:registros|Registros~881    ; Lost fanout                            ;
+; register_unit:registros|Registros~882    ; Lost fanout                            ;
+; register_unit:registros|Registros~883    ; Lost fanout                            ;
+; register_unit:registros|Registros~884    ; Lost fanout                            ;
+; register_unit:registros|Registros~885    ; Lost fanout                            ;
+; register_unit:registros|Registros~886    ; Lost fanout                            ;
+; register_unit:registros|Registros~887    ; Lost fanout                            ;
+; register_unit:registros|Registros~888    ; Lost fanout                            ;
+; register_unit:registros|Registros~889    ; Lost fanout                            ;
+; register_unit:registros|Registros~890    ; Lost fanout                            ;
+; register_unit:registros|Registros~891    ; Lost fanout                            ;
+; register_unit:registros|Registros~892    ; Lost fanout                            ;
+; register_unit:registros|Registros~893    ; Lost fanout                            ;
+; register_unit:registros|Registros~894    ; Lost fanout                            ;
+; register_unit:registros|Registros~895    ; Lost fanout                            ;
+; register_unit:registros|Registros~896    ; Lost fanout                            ;
+; register_unit:registros|Registros~897    ; Lost fanout                            ;
+; register_unit:registros|Registros~898    ; Lost fanout                            ;
+; register_unit:registros|Registros~899    ; Lost fanout                            ;
+; register_unit:registros|Registros~900    ; Lost fanout                            ;
+; register_unit:registros|Registros~901    ; Lost fanout                            ;
+; register_unit:registros|Registros~902    ; Lost fanout                            ;
+; register_unit:registros|Registros~903    ; Lost fanout                            ;
+; register_unit:registros|Registros~904    ; Lost fanout                            ;
+; register_unit:registros|Registros~905    ; Lost fanout                            ;
+; register_unit:registros|Registros~906    ; Lost fanout                            ;
+; register_unit:registros|Registros~907    ; Lost fanout                            ;
+; register_unit:registros|Registros~908    ; Lost fanout                            ;
+; register_unit:registros|Registros~909    ; Lost fanout                            ;
+; register_unit:registros|Registros~910    ; Lost fanout                            ;
+; register_unit:registros|Registros~911    ; Lost fanout                            ;
+; register_unit:registros|Registros~912    ; Lost fanout                            ;
+; register_unit:registros|Registros~913    ; Lost fanout                            ;
+; register_unit:registros|Registros~914    ; Lost fanout                            ;
+; register_unit:registros|Registros~915    ; Lost fanout                            ;
+; register_unit:registros|Registros~916    ; Lost fanout                            ;
+; register_unit:registros|Registros~917    ; Lost fanout                            ;
+; register_unit:registros|Registros~918    ; Lost fanout                            ;
+; register_unit:registros|Registros~919    ; Lost fanout                            ;
+; register_unit:registros|Registros~920    ; Lost fanout                            ;
+; register_unit:registros|Registros~921    ; Lost fanout                            ;
+; register_unit:registros|Registros~922    ; Lost fanout                            ;
+; register_unit:registros|Registros~923    ; Lost fanout                            ;
+; register_unit:registros|Registros~924    ; Lost fanout                            ;
+; register_unit:registros|Registros~925    ; Lost fanout                            ;
+; register_unit:registros|Registros~926    ; Lost fanout                            ;
+; register_unit:registros|Registros~927    ; Lost fanout                            ;
+; register_unit:registros|Registros~928    ; Lost fanout                            ;
+; register_unit:registros|Registros~929    ; Lost fanout                            ;
+; register_unit:registros|Registros~930    ; Lost fanout                            ;
+; register_unit:registros|Registros~931    ; Lost fanout                            ;
+; register_unit:registros|Registros~932    ; Lost fanout                            ;
+; register_unit:registros|Registros~933    ; Lost fanout                            ;
+; register_unit:registros|Registros~934    ; Lost fanout                            ;
+; register_unit:registros|Registros~935    ; Lost fanout                            ;
+; register_unit:registros|Registros~936    ; Lost fanout                            ;
+; register_unit:registros|Registros~937    ; Lost fanout                            ;
+; register_unit:registros|Registros~938    ; Lost fanout                            ;
+; register_unit:registros|Registros~939    ; Lost fanout                            ;
+; register_unit:registros|Registros~940    ; Lost fanout                            ;
+; register_unit:registros|Registros~941    ; Lost fanout                            ;
+; register_unit:registros|Registros~942    ; Lost fanout                            ;
+; register_unit:registros|Registros~943    ; Lost fanout                            ;
+; register_unit:registros|Registros~944    ; Lost fanout                            ;
+; register_unit:registros|Registros~945    ; Lost fanout                            ;
+; register_unit:registros|Registros~946    ; Lost fanout                            ;
+; register_unit:registros|Registros~947    ; Lost fanout                            ;
+; register_unit:registros|Registros~948    ; Lost fanout                            ;
+; register_unit:registros|Registros~949    ; Lost fanout                            ;
+; register_unit:registros|Registros~950    ; Lost fanout                            ;
+; register_unit:registros|Registros~951    ; Lost fanout                            ;
+; register_unit:registros|Registros~952    ; Lost fanout                            ;
+; register_unit:registros|Registros~953    ; Lost fanout                            ;
+; register_unit:registros|Registros~954    ; Lost fanout                            ;
+; register_unit:registros|Registros~955    ; Lost fanout                            ;
+; register_unit:registros|Registros~956    ; Lost fanout                            ;
+; register_unit:registros|Registros~957    ; Lost fanout                            ;
+; register_unit:registros|Registros~958    ; Lost fanout                            ;
+; register_unit:registros|Registros~959    ; Lost fanout                            ;
+; register_unit:registros|Registros~960    ; Lost fanout                            ;
+; register_unit:registros|Registros~961    ; Lost fanout                            ;
+; register_unit:registros|Registros~962    ; Lost fanout                            ;
+; register_unit:registros|Registros~963    ; Lost fanout                            ;
+; register_unit:registros|Registros~964    ; Lost fanout                            ;
+; register_unit:registros|Registros~965    ; Lost fanout                            ;
+; register_unit:registros|Registros~966    ; Lost fanout                            ;
+; register_unit:registros|Registros~967    ; Lost fanout                            ;
+; register_unit:registros|Registros~968    ; Lost fanout                            ;
+; register_unit:registros|Registros~969    ; Lost fanout                            ;
+; register_unit:registros|Registros~970    ; Lost fanout                            ;
+; register_unit:registros|Registros~971    ; Lost fanout                            ;
+; register_unit:registros|Registros~972    ; Lost fanout                            ;
+; register_unit:registros|Registros~973    ; Lost fanout                            ;
+; register_unit:registros|Registros~974    ; Lost fanout                            ;
+; register_unit:registros|Registros~975    ; Lost fanout                            ;
+; register_unit:registros|Registros~976    ; Lost fanout                            ;
+; register_unit:registros|Registros~977    ; Lost fanout                            ;
+; register_unit:registros|Registros~978    ; Lost fanout                            ;
+; register_unit:registros|Registros~979    ; Lost fanout                            ;
+; register_unit:registros|Registros~980    ; Lost fanout                            ;
+; register_unit:registros|Registros~981    ; Lost fanout                            ;
+; register_unit:registros|Registros~982    ; Lost fanout                            ;
+; register_unit:registros|Registros~983    ; Lost fanout                            ;
+; register_unit:registros|Registros~984    ; Lost fanout                            ;
+; register_unit:registros|Registros~985    ; Lost fanout                            ;
+; register_unit:registros|Registros~986    ; Lost fanout                            ;
+; register_unit:registros|Registros~987    ; Lost fanout                            ;
+; register_unit:registros|Registros~988    ; Lost fanout                            ;
+; register_unit:registros|Registros~989    ; Lost fanout                            ;
+; register_unit:registros|Registros~990    ; Lost fanout                            ;
+; register_unit:registros|Registros~991    ; Lost fanout                            ;
+; register_unit:registros|Registros~992    ; Lost fanout                            ;
+; register_unit:registros|Registros~993    ; Lost fanout                            ;
+; register_unit:registros|Registros~994    ; Lost fanout                            ;
+; register_unit:registros|Registros~995    ; Lost fanout                            ;
+; register_unit:registros|Registros~996    ; Lost fanout                            ;
+; register_unit:registros|Registros~997    ; Lost fanout                            ;
+; register_unit:registros|Registros~998    ; Lost fanout                            ;
+; register_unit:registros|Registros~999    ; Lost fanout                            ;
+; register_unit:registros|Registros~1000   ; Lost fanout                            ;
+; register_unit:registros|Registros~1001   ; Lost fanout                            ;
+; register_unit:registros|Registros~1002   ; Lost fanout                            ;
+; register_unit:registros|Registros~1003   ; Lost fanout                            ;
+; register_unit:registros|Registros~1004   ; Lost fanout                            ;
+; register_unit:registros|Registros~1005   ; Lost fanout                            ;
+; register_unit:registros|Registros~1006   ; Lost fanout                            ;
+; register_unit:registros|Registros~1007   ; Lost fanout                            ;
+; register_unit:registros|Registros~1008   ; Lost fanout                            ;
+; register_unit:registros|Registros~1009   ; Lost fanout                            ;
+; register_unit:registros|Registros~1010   ; Lost fanout                            ;
+; register_unit:registros|Registros~1011   ; Lost fanout                            ;
+; register_unit:registros|Registros~1012   ; Lost fanout                            ;
+; register_unit:registros|Registros~1013   ; Lost fanout                            ;
+; register_unit:registros|Registros~1014   ; Lost fanout                            ;
+; register_unit:registros|Registros~1015   ; Lost fanout                            ;
+; register_unit:registros|Registros~1016   ; Lost fanout                            ;
+; register_unit:registros|Registros~1017   ; Lost fanout                            ;
+; register_unit:registros|Registros~1018   ; Lost fanout                            ;
+; register_unit:registros|Registros~1019   ; Lost fanout                            ;
+; register_unit:registros|Registros~1020   ; Lost fanout                            ;
+; register_unit:registros|Registros~1021   ; Lost fanout                            ;
+; register_unit:registros|Registros~1022   ; Lost fanout                            ;
+; register_unit:registros|Registros~1023   ; Lost fanout                            ;
+; register_unit:registros|Registros~0      ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~32     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~1      ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~33     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~2      ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~34     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~3      ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~35     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~4      ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~36     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~5      ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~37     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~6      ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~38     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~7      ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~39     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~8      ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~40     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~9      ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~41     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~10     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~42     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~11     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~43     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~12     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~44     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~13     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~45     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~14     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~46     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~15     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~47     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~16     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~48     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~17     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~49     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~18     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~50     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~19     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~51     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~20     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~52     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~21     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~53     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~22     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~54     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~23     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~55     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~24     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~56     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~25     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~57     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~26     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~58     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~27     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~59     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~28     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~60     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~29     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~61     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~30     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~62     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~31     ; Stuck at GND due to stuck port data_in ;
+; register_unit:registros|Registros~63     ; Stuck at GND due to stuck port data_in ;
+; pc:pcInst|address[12..31]                ; Lost fanout                            ;
+; register_unit:registros|Registros~76     ; Lost fanout                            ;
+; register_unit:registros|Registros~77     ; Lost fanout                            ;
+; register_unit:registros|Registros~78     ; Lost fanout                            ;
+; register_unit:registros|Registros~79     ; Lost fanout                            ;
+; register_unit:registros|Registros~80     ; Lost fanout                            ;
+; register_unit:registros|Registros~81     ; Lost fanout                            ;
+; register_unit:registros|Registros~82     ; Lost fanout                            ;
+; register_unit:registros|Registros~83     ; Lost fanout                            ;
+; register_unit:registros|Registros~84     ; Lost fanout                            ;
+; register_unit:registros|Registros~85     ; Lost fanout                            ;
+; register_unit:registros|Registros~86     ; Lost fanout                            ;
+; register_unit:registros|Registros~87     ; Lost fanout                            ;
+; register_unit:registros|Registros~88     ; Lost fanout                            ;
+; register_unit:registros|Registros~89     ; Lost fanout                            ;
+; register_unit:registros|Registros~90     ; Lost fanout                            ;
+; register_unit:registros|Registros~91     ; Lost fanout                            ;
+; register_unit:registros|Registros~92     ; Lost fanout                            ;
+; register_unit:registros|Registros~93     ; Lost fanout                            ;
+; register_unit:registros|Registros~94     ; Lost fanout                            ;
+; register_unit:registros|Registros~95     ; Lost fanout                            ;
+; Total Number of Removed Registers = 1034 ;                                        ;
++------------------------------------------+----------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                               ;
++--------------------------------------+---------------------------+----------------------------------------+
+; Register name                        ; Reason for Removal        ; Registers Removed due to This Register ;
++--------------------------------------+---------------------------+----------------------------------------+
+; register_unit:registros|Registros~12 ; Stuck at GND              ; register_unit:registros|Registros~76   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~13 ; Stuck at GND              ; register_unit:registros|Registros~77   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~14 ; Stuck at GND              ; register_unit:registros|Registros~78   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~15 ; Stuck at GND              ; register_unit:registros|Registros~79   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~16 ; Stuck at GND              ; register_unit:registros|Registros~80   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~17 ; Stuck at GND              ; register_unit:registros|Registros~81   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~18 ; Stuck at GND              ; register_unit:registros|Registros~82   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~19 ; Stuck at GND              ; register_unit:registros|Registros~83   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~20 ; Stuck at GND              ; register_unit:registros|Registros~84   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~21 ; Stuck at GND              ; register_unit:registros|Registros~85   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~22 ; Stuck at GND              ; register_unit:registros|Registros~86   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~23 ; Stuck at GND              ; register_unit:registros|Registros~87   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~24 ; Stuck at GND              ; register_unit:registros|Registros~88   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~25 ; Stuck at GND              ; register_unit:registros|Registros~89   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~26 ; Stuck at GND              ; register_unit:registros|Registros~90   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~27 ; Stuck at GND              ; register_unit:registros|Registros~91   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~28 ; Stuck at GND              ; register_unit:registros|Registros~92   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~29 ; Stuck at GND              ; register_unit:registros|Registros~93   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~30 ; Stuck at GND              ; register_unit:registros|Registros~94   ;
+;                                      ; due to stuck port data_in ;                                        ;
+; register_unit:registros|Registros~31 ; Stuck at GND              ; register_unit:registros|Registros~95   ;
+;                                      ; due to stuck port data_in ;                                        ;
++--------------------------------------+---------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -245,9 +1314,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Total registers                              ; 22    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 22    ;
+; Number of registers using Asynchronous Clear ; 10    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 12    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -258,20 +1327,24 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; arriav_ff             ; 22                          ;
-;     CLR               ; 22                          ;
-; arriav_lcell_comb     ; 67                          ;
+;     CLR               ; 10                          ;
+;     ENA               ; 12                          ;
+; arriav_lcell_comb     ; 71                          ;
 ;     arith             ; 21                          ;
-;         1 data inputs ; 20                          ;
+;         1 data inputs ; 8                           ;
 ;         2 data inputs ; 1                           ;
-;     normal            ; 46                          ;
+;         4 data inputs ; 11                          ;
+;         5 data inputs ; 1                           ;
+;     normal            ; 50                          ;
 ;         0 data inputs ; 2                           ;
 ;         1 data inputs ; 7                           ;
 ;         2 data inputs ; 2                           ;
-;         4 data inputs ; 35                          ;
+;         4 data inputs ; 37                          ;
+;         5 data inputs ; 2                           ;
 ; boundary_port         ; 54                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 3.00                        ;
-; Average LUT depth     ; 1.88                        ;
+; Max LUT depth         ; 5.10                        ;
+; Average LUT depth     ; 3.11                        ;
 +-----------------------+-----------------------------+
 
 
@@ -290,7 +1363,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
-    Info: Processing started: Wed Oct  1 17:31:15 2025
+    Info: Processing started: Fri Oct  3 18:23:19 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RiscVpc -c RiscVpc
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
@@ -308,11 +1381,27 @@ Info (12021): Found 1 design units, including 1 entities, in source file alu.sv
     Info (12023): Found entity 1: ALU File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/ALU.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file register_unit.sv
     Info (12023): Found entity 1: register_unit File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/register_unit.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file instructionmemory.sv
+    Info (12023): Found entity 1: instructionMemory File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/instructionMemory.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file control_unit.sv
+    Info (12023): Found entity 1: control_unit File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/control_unit.sv Line: 1
 Info (12127): Elaborating entity "top_level" for the top level hierarchy
-Info (12128): Elaborating entity "sumador" for hierarchy "sumador:sumar" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 21
-Info (12128): Elaborating entity "pc" for hierarchy "pc:pcInst" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 29
-Info (12128): Elaborating entity "hex7seg" for hierarchy "hex7seg:displayN0" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 35
-Warning (10272): Verilog HDL Case Statement warning at hex7seg.sv(18): case item expression covers a value already covered by a previous case item File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/hex7seg.sv Line: 18
+Info (12128): Elaborating entity "sumador" for hierarchy "sumador:sumar" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 52
+Info (12128): Elaborating entity "pc" for hierarchy "pc:pcInst" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 61
+Info (12128): Elaborating entity "instructionMemory" for hierarchy "instructionMemory:imem" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 68
+Warning (10850): Verilog HDL warning at instructionMemory.sv(11): number of words (5) in memory file does not match the number of elements in the address range [0:127] File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/instructionMemory.sv Line: 11
+Warning (10030): Net "instrucciones.data_a" at instructionMemory.sv(7) has no driver or initial value, using a default initial value '0' File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/instructionMemory.sv Line: 7
+Warning (10030): Net "instrucciones.waddr_a" at instructionMemory.sv(7) has no driver or initial value, using a default initial value '0' File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/instructionMemory.sv Line: 7
+Warning (10030): Net "instrucciones.we_a" at instructionMemory.sv(7) has no driver or initial value, using a default initial value '0' File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/instructionMemory.sv Line: 7
+Info (12128): Elaborating entity "control_unit" for hierarchy "control_unit:controla" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 78
+Warning (10230): Verilog HDL assignment warning at control_unit.sv(32): truncated value with size 32 to match size of target (4) File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/control_unit.sv Line: 32
+Info (12128): Elaborating entity "register_unit" for hierarchy "register_unit:registros" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 92
+Info (12128): Elaborating entity "ALU" for hierarchy "ALU:operaciones" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 101
+Info (12128): Elaborating entity "hex7seg" for hierarchy "hex7seg:displayN0" File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 105
+Info (276014): Found 2 instances of uninferred RAM logic
+    Info (276007): RAM logic "register_unit:registros|Registros" is uninferred due to asynchronous read logic File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/register_unit.sv Line: 14
+    Info (276004): RAM logic "instructionMemory:imem|instrucciones" is uninferred due to inappropriate RAM size File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/instructionMemory.sv Line: 7
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/db/RiscVpc.ram0_instructionMemory_929dabe3.hdl.mif" contains "don't care" values -- overwriting them with 0s
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "leds[0]" is stuck at GND File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 4
     Warning (13410): Pin "leds[1]" is stuck at VCC File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 4
@@ -326,17 +1415,17 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "leds[9]" is stuck at VCC File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 4
     Warning (13410): Pin "display0[5]" is stuck at GND File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/top_level.v Line: 5
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 8 registers lost all their fanouts during netlist optimizations.
+Info (17049): 968 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 114 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 130 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 52 output pins
-    Info (21061): Implemented 60 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 14 warnings
+    Info (21061): Implemented 76 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 19 warnings
     Info: Peak virtual memory: 4867 megabytes
-    Info: Processing ended: Wed Oct  1 17:31:28 2025
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:28
+    Info: Processing ended: Fri Oct  3 18:23:27 2025
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:19
 
 

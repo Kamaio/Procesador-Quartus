@@ -1,26 +1,27 @@
 module register_unit(
-  input  wire        clk,
-  input  wire [4:0]  rs1,
-  input  wire [4:0]  rs2,
-  input  wire [4:0]  rd,
-  input  wire        RUWr,               // write enable
-  output wire [31:0] output_rs1,       // lecturas asíncronas
-  output wire [31:0] output_rs2,
-  output wire [31:0] resultadoALU
+	input  wire        clk,
+	input  wire [4:0]  rs1,
+	input  wire [4:0]  rs2,
+	input  wire [4:0]  rd,
+	input  wire        RUWr,
+	input wire [31:0] resultadoALU,
+	
+	output wire [31:0] output_rs1,
+	output wire [31:0] output_rs2
+  
 );
 
   reg [31:0] Registros [31:0];
+  
+  
+  assign output_rs1 = (rs1==5'b1) ? 32'b1 : Registros[rs1];//temp
+  assign output_rs2 = (rs2==5'b1) ? 32'b1 : Registros[rs2];
+  
 
   // lecturas asíncronas
-  assign output_rs1 = Registros[rs1];
-  assign output_rs2 = Registros[rs2];
+  //assign output_rs1 = Registros[rs1];
+  //assign output_rs2 = Registros[rs2];
 
-  // ALU combinacional
-  ALU operaciones (
-    .ValA(output_rs1),
-    .ValB(output_rs2),
-    .resultado(resultadoALU)
-  );
 
   // escritura síncrona
   always @(posedge clk) begin
@@ -28,7 +29,6 @@ module register_unit(
     if (RUWr && rd != 5'd0)
       Registros[rd] <= resultadoALU;
     
-	 
   end
 
 endmodule
