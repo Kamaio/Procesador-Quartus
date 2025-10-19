@@ -6,9 +6,11 @@ input wire [6:0] funct7,
 
 //decode
 output wire RUWr,
+output wire [2:0] IMMSrc,
 
 //execute
-output wire [3:0] ALUop
+output reg [3:0] ALUop,
+output reg ALUBSrc
 );
 
 
@@ -29,7 +31,33 @@ always @(*) begin
       10'b0000000111: ALUop = 4'b0111; // and
       10'b1000000000: ALUop = 4'b1000; // sub
       10'b1000000101: ALUop = 4'b1101; // sra
-      default:        ALUop = 32'h0;
+      default:        ALUop = 4'b0;
     endcase
+	 
+	 
+	case (opcode)
+		7'b0010011: begin
+			IMMSrc  = 3'b000; // tipo i
+			ALUBSrc = 1'b1;    // permiso mux
+		end
+		
+      7'b0000011: begin
+			IMMSrc  = 3'b001; // tipo i de carga
+			ALUBSrc = 1'b1;    // permiso mux
+		end
+		
+      7'b0100011: begin
+			IMMSrc = 3'b010; // tipo S
+			ALUBSrc = 1'b1;    // permiso mux
+		end
+
+      default:    IMMSrc = 3'h0;
+    endcase
+	 
+	 
+	 
+	 
+	 
+	 
   end
 endmodule

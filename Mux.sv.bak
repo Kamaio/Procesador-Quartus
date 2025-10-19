@@ -1,0 +1,16 @@
+module Mux(
+input wire [11:0] A,
+input wire [11:0] B,
+input wire C,
+output wire [11:0] decidido
+);
+
+
+always @(*) begin
+
+	decidido = 1 ? B : A;
+
+end
+
+
+endmodule

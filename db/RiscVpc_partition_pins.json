@@ -140,19 +140,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "display5[0]",
-					"strict" : false
-				},
-				{
 					"name" : "display5[1]",
 					"strict" : false
 				},
 				{
 					"name" : "display5[2]",
-					"strict" : false
-				},
-				{
-					"name" : "display5[3]",
 					"strict" : false
 				},
 				{

@@ -1,0 +1,20 @@
+module Generador_Imm(
+input wire [31:0] inst,
+input wire [2:0] IMMSrc,
+output wire [11:0] imm
+);
+
+	always @(*) begin
+    case (IMMSrc)
+      3'b000: imm = inst[31:20];                     // tipo i
+      3'b001: imm = valA << valB[4:0];               // aun ni idea
+      3'b010: imm = ($signed(valA) < $signed(valB)); // aun ni idea
+      3'b011: imm = (valA < valB);                   // aun ni idea
+      3'b010: imm = valA ^ valB;                     // aun ni idea
+      default: imm = 32'h0;
+    endcase
+  end
+
+
+
+endmodule

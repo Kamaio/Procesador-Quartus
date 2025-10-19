@@ -19,7 +19,7 @@ module top_level(
   wire [31:0] inst;
   
 	
-  //instruccion partida hasta ahora solo tipo r
+  //instrucciones partidas para tipo r
   wire [6:0] opcode = inst[6:0];
   wire [4:0] rd     = inst[11:7];
   wire [2:0] funct3 = inst[14:12];
@@ -28,13 +28,30 @@ module top_level(
   wire [6:0] funct7 = inst[31:25];
   
   
+  
+  wire [11:0] imm;
+  //instrucciones partidas para tipo i
+  wire [6:0] opcodeI = inst[6:0];
+  wire [4:0] rdI     = inst[11:7];
+  wire [2:0] funct3I = inst[14:12];
+  wire [4:0] rs1I    = inst[19:15];
+  
+  
+  
   //Salidas control unit
   wire RUWr;
+  wire [2:0] IMMSrc;
   wire [3:0] ALUop;
+  wire ALUBSrc;
+  
 
   
   // Salidas Register unit
   wire [31:0] rdata1, rdata2;
+  
+  
+  //multiplerxorB
+  wire [31:0] rdata2Final;
   
   
   //Salidas ALU
@@ -73,8 +90,12 @@ module top_level(
 	.opcode(opcode),
 	.funct3(funct3),
 	.funct7(funct7),
+	
 	.RUWr(RUWr),
-	.ALUop(ALUop)
+	.IMMSrc(IMMSrc),
+	
+	.ALUop(ALUop),
+	.ALUBSrc(ALUBSrc)
   );
   
   
@@ -92,10 +113,27 @@ module top_level(
   );
   
   
+  //generador de imm
+   Generador_Imm inmediatos(
+	 .inst(inst),
+	 .IMMSrc(IMMSrc),
+	 .imm(imm)
+	);
+	
+	
+	Mux multiplexor1(
+	 .A(rdata2),
+	 .B(imm),
+	 .C(ALUBSrc),
+	 .decidido(rdata2Final)
+	);
+	
+  
+  
   //ALU
    ALU operaciones (
     .valA(rdata1),
-    .valB(rdata2),
+    .valB(rdata2Final),
 	 .operacion(ALUop),
     .resultado(resultadoALU)
   );
@@ -106,8 +144,8 @@ module top_level(
   hex7seg displayN1(.val(pc[7:4]),    .display(display1));
   hex7seg displayN2(.val(pc[11:8]),   .display(display2));
   hex7seg displayN3(.val(resultadoALU[3:0]),  .display(display3));
-  hex7seg displayN4(.val(resultadoALU[7:4]),  .display(display4));
-  hex7seg displayN5(.val(resultadoALU[11:8]),  .display(display5));
+  hex7seg displayN4(.val(rdata1),  .display(display4));
+  hex7seg displayN5(.val(rdata2Final),  .display(display5));
 
   assign leds = 10'b1010101010;
 

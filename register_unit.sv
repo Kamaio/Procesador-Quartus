@@ -13,14 +13,10 @@ module register_unit(
 
   reg [31:0] Registros [31:0];
   
-  
-  assign output_rs1 = (rs1==5'b1) ? 32'b1 : Registros[rs1];//temp
-  assign output_rs2 = (rs2==5'b1) ? 32'b1 : Registros[rs2];
-  
 
   // lecturas asíncronas
-  //assign output_rs1 = Registros[rs1];
-  //assign output_rs2 = Registros[rs2];
+  assign output_rs1 = Registros[rs1];
+  assign output_rs2 = Registros[rs2];
 
 
   // escritura síncrona
