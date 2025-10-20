@@ -10,13 +10,18 @@ output wire [2:0] IMMSrc,
 
 //execute
 output reg [3:0] ALUop,
-output reg ALUBSrc
+output reg ALUBSrc,
+
+//memory
+output reg DMWR,
+output reg[2:0] DMCtrl,
+
+//wb
+output reg[2:0] RUDataWrSrc
 );
 
 
 wire [9:0] combinacion = {funct7, funct3};
-
-assign RUWr = 1'b1;
 
 
 always @(*) begin
@@ -36,22 +41,45 @@ always @(*) begin
 	 
 	 
 	case (opcode)
+		7'b0110011: begin
+			RUWr = 1'b1;
+			ALUBSrc = 1'b0;
+			RUDataWrSrc = 2'b0;   //quita permiso de la data memory
+			DMWR = 1'b0;
+		end
+	
+	
 		7'b0010011: begin
-			IMMSrc  = 3'b000; // tipo i
-			ALUBSrc = 1'b1;    // permiso mux
+			RUWr = 1'b1;
+			IMMSrc  = 3'b000;     // tipo i
+			ALUBSrc = 1'b1;       // permiso mux
+			RUDataWrSrc = 2'b0;   //quita permiso de la data memory 
 		end
 		
       7'b0000011: begin
-			IMMSrc  = 3'b001; // tipo i de carga
-			ALUBSrc = 1'b1;    // permiso mux
+			RUWr = 1'b1;
+			IMMSrc  = 3'b001;     // tipo i de carga
+			ALUBSrc = 1'b1;       // permiso mux
+			ALUop = 4'b0000;      // add
+			
+			DMWR = 1'b0;          // tipo I de carga
+			
+			DMCtrl = funct3;      //aca se decide cuantos bits se agarra de la memoria
+			RUDataWrSrc = 2'b01;  //mux de data memory
+			
 		end
 		
       7'b0100011: begin
-			IMMSrc = 3'b010; // tipo S
-			ALUBSrc = 1'b1;    // permiso mux
+			RUWr = 1'b0;
+			IMMSrc = 3'b010;      // tipo S
+			ALUBSrc = 1'b1;       // permiso mux
 		end
 
-      default:    IMMSrc = 3'h0;
+      default: begin  
+			IMMSrc = 3'h0;
+			ALUBSrc = 1'b0;
+		end
+		
     endcase
 	 
 	 

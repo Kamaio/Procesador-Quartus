@@ -1,0 +1,31 @@
+module dataMemory(
+	input wire[31:0] address,
+	//aca va la sehgunda entarda que aun no se usa
+	input wire DMWR,
+	input wire[2:0] DMCtrl,
+	
+	output wire[31:0] DataRd
+);
+	
+	reg [7:0] memoria [0:127];
+
+	always @(*)begin
+	
+		if(DMRW)begin
+		//aca van las cosas de las tipo S porque DMRW esta encendido
+		end
+		
+		else begin
+			case(DMCtrl)
+				3'b000:  DataRd = {{24{memoria[address+1'b1]}}, {memoria[address+1'b1   : address]} }; //8  lb
+				3'b001:  DataRd = {{24{memoria[address+1'b1]}}, {memoria[address+2'b10  : address]} }; //16 lh
+				3'b010:  DataRd = {{24{memoria[address+1'b1]}}, {memoria[address+3'b100 : address]} }; //32 lw
+				3'b100:  DataRd = {{24{memoria[address+1'b1]}}, {memoria[address+1'b1   : address]} }; //8  lb sin la u
+				3'b101:  DataRd = {{24{memoria[address+1'b1]}}, {memoria[address+2'b10  : address]} }; //16 lh sin la u porque aun no se como funciona
+				default: DataRd = 32'b0
+			endcase
+		end
+	
+	end
+
+endmodule
