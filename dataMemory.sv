@@ -1,37 +1,50 @@
 module dataMemory(
-	input wire[31:0] address,
-	//aca va la sehgunda entarda que aun no se usa
-	input wire DMWR,
-	input wire[2:0] DMCtrl,
-	
-	output reg[31:0] DataRd
+    input wire clk,
+    input wire [31:0] address,  //posicion a buscar o escribir(ALU)
+    input wire [31:0] writeData,   // informacion que se escribe
+    input wire 		 DMWR,   // 1 = write, 0 = read
+    input wire [2:0]  DMCtrl,   // cuanto vamos a cargar/guardar (b8, h16, w32)
+	 
+    output reg [31:0] DataRd,  // Informacion de data memory que se carga (i carga)
+	 
+	 output wire [31:0] salidaChimbaW, // Tipo s, escribir
+	 output wire [31:0] salidaChimbaR  // Tipo I carga, leer
 );
-	
-	reg [7:0] memoria [0:127];
-	
-	wire [7:0]  b0 = memoria[address + 0];
-	wire [7:0]  b1 = memoria[address + 1];
-	wire [7:0]  b2 = memoria[address + 2];
-	wire [7:0]  b3 = memoria[address + 3];
-		
 
-	always @(*)begin
-	
-		if(DMWR)begin
-		//aca van las cosas de las tipo S porque DMRW esta encendido
-		end
-		
-		else begin
-			case(DMCtrl) 
-				3'b000:  DataRd = {{ 24{b0[7]} }, b0 };             //8  lb
-				3'b001:  DataRd = {{ 16{b1[7]} }, b1, b0 };         //16 lh
-				3'b010:  DataRd = {               b3, b2, b1, b0 }; //32 lw
-				3'b100:  DataRd = { 24'b0,        b0};              //8  lb sin la u
-				3'b101:  DataRd = { 16'b0,        b1, b0 };         //16 lh sin la u porque aun no se como funciona
-				default: DataRd = 32'b0;
-			endcase
-		end
-	
-	end
+    reg [7:0] memoria [0:127]; // En memoria se gurda al contrario
+	 
+
+    // Escritura sincrónica
+    always @(posedge clk) begin
+        if (DMWR) begin
+            case(DMCtrl)
+                3'b000: memoria[address] <= writeData[7:0]; // Sb
+                3'b001: begin
+                    memoria[address]   <= writeData[7:0];   //Sh
+                    memoria[address+1] <= writeData[15:8];
+                end
+                3'b010: begin
+                    memoria[address]   <= writeData[7:0];   //Sw
+                    memoria[address+1] <= writeData[15:8];
+                    memoria[address+2] <= writeData[23:16];
+                    memoria[address+3] <= writeData[31:24];
+                end
+            endcase
+				
+				salidaChimbaW = writeData[31:0];
+        end
+    end
+
+    // Lectura combinacional
+    always @(*) begin
+        case(DMCtrl)
+            3'b000: DataRd = {{24{memoria[address][7]}}, memoria[address]}; // LB 8
+            3'b001: DataRd = {{16{memoria[address+1][7]}}, memoria[address+1], memoria[address]}; // LH 16
+            3'b010: DataRd = {memoria[address+3], memoria[address+2], memoria[address+1], memoria[address]}; // LW 32
+            default: DataRd = 0;
+        endcase
+		  
+		  salidaChimbaR = DataRd;
+    end
 
 endmodule

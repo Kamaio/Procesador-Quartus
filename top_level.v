@@ -1,5 +1,6 @@
 module top_level(
   input  wire        clk,
+  input  wire        clkFPGA,
   input  wire        rst_n,
   output wire [9:0]  leds,
   output wire [6:0]  display0,
@@ -10,10 +11,21 @@ module top_level(
   output wire [6:0]  display5,
   
   
-  
+  input switch0,
   input switch1,
   input switch2,
-  input switch3
+  input switch3,
+  input switch4,
+  input switch5,
+  
+  
+  
+  output [7:0] vga_red,
+  output [7:0] vga_green,
+  output [7:0] vga_blue,
+  output vga_hsync,
+  output vga_vsync,
+  output vga_clock
 );
 
   //PC
@@ -68,6 +80,23 @@ module top_level(
   
   //multiplexor resultadoalu/datamemory
   reg [31:0] dataFinal;
+  
+  
+  
+  wire [31:0] memoryR1;
+  wire [31:0] memoryR2;
+  wire [31:0] memoryR3;
+  wire [31:0] memoryR4;
+  wire [31:0] memoryR5;
+  wire [31:0] memoryR6;
+  wire [31:0] memoryR7;
+  wire [31:0] memoryR8;
+  wire [31:0] memoryR9;
+  
+  
+  
+  wire [31:0] salidaChimbaW;
+  wire [31:0] salidaChimbaR;
 
   
  //--------------------Conexiones de los modulos-------------------------------// 
@@ -116,7 +145,6 @@ module top_level(
   );
   
   
-  
   // register unit
   register_unit registros(
     .clk(clk),
@@ -124,10 +152,41 @@ module top_level(
     .rs2(rs2),
     .rd(rd),
 	 .RUWr(RUWr),
-	 //.resultadoALU(resultadoALU),
 	 .resultadoALU(dataFinal),
     .output_rs1(rdata1),
-    .output_rs2(rdata2)
+    .output_rs2(rdata2),
+	 
+	 .memoryR1(memoryR1),
+	 .memoryR2(memoryR2),
+	 .memoryR3(memoryR3),
+	 .memoryR4(memoryR4),
+	 .memoryR5(memoryR5),
+	 .memoryR6(memoryR6),
+	 .memoryR7(memoryR7),
+	 .memoryR8(memoryR8),
+	 .memoryR9(memoryR9),
+	 .memoryR10(memoryR10),
+	 .memoryR11(memoryR11),
+	 .memoryR12(memoryR12),
+	 .memoryR13(memoryR13),
+	 .memoryR14(memoryR14),
+	 .memoryR15(memoryR15),
+	 .memoryR16(memoryR16),
+	 .memoryR17(memoryR17),
+	 .memoryR18(memoryR18),
+	 .memoryR19(memoryR19),
+	 .memoryR20(memoryR20),
+	 .memoryR21(memoryR21),
+	 .memoryR22(memoryR22),
+	 .memoryR23(memoryR23),
+	 .memoryR24(memoryR24),
+	 .memoryR25(memoryR25),
+	 .memoryR26(memoryR26),
+	 .memoryR27(memoryR27),
+	 .memoryR28(memoryR28),
+	 .memoryR29(memoryR29),
+	 .memoryR30(memoryR30),
+	 .memoryR31(memoryR31)
   );
   
   
@@ -138,13 +197,7 @@ module top_level(
 	 .imm(imm)
 	);
 	
-	
-	//Mux multiplexor1(
-	 //.A(rdata2),
-	 //.B(imm),
-	 //.C(ALUBSrc),
-	 //.decidido(rdata2Final)
-	//);
+	//multiplexor B
 	always @(*) begin
 		rdata2Final = ALUBSrc ? imm : rdata2;
 	end
@@ -161,10 +214,14 @@ module top_level(
   
   //dataMemory
   dataMemory dataMemory(
+	 .clk(clk),
 	 .address(resultadoALU),
+	 .writeData(rdata2),
 	 .DMWR(DMWR),
 	 .DMCtrl(DMCtrl),
-	 .DataRd(DataRd)
+	 .DataRd(DataRd),
+	 .salidaChimbaW(salidaChimbaW),
+	 .salidaChimbaR(salidaChimbaR)
   );
   
   
@@ -173,21 +230,83 @@ module top_level(
 		dataFinal = (RUDataWrSrc == 2'b01)? DataRd : resultadoALU; //aca faltaria la tercera salida de ese mux
 	end
   
+  
+  
+  
+  
+  color color(
+     .clock(clkFPGA),
+	  .sw0(switch0),                   // reset
+     .sw1(switch1),
+     .sw2(switch2),
+     .sw3(switch3),
+     .sw4(switch4),
+     .sw5(switch5),
+	  .vga_red(vga_red),
+	  .vga_green(vga_green),
+	  .vga_blue(vga_blue),
+	  .vga_hsync(vga_hsync),
+	  .vga_vsync(vga_vsync),
+	  .vga_clock(vga_clock),
+	  
+	  
+	  .inst(inst),
+	  .rd(rd),
+	  .rs1(rs1),
+	  .rdata1(rdata1),
+	  .rs2(rs2),
+	  .rdata2(rdata2),
+	  .ALUop(ALUop),
+	  .resultadoALU(dataFinal),
+	  
+	  .memoryR1(memoryR1),
+	  .memoryR2(memoryR2),
+	  .memoryR3(memoryR3),
+	  .memoryR4(memoryR4),
+	  .memoryR5(memoryR5),
+	  .memoryR6(memoryR6),
+	  .memoryR7(memoryR7),
+	  .memoryR8(memoryR8),
+	  .memoryR9(memoryR9),
+	  .memoryR10(memoryR10),
+	  .memoryR11(memoryR11),
+	  .memoryR12(memoryR12),
+	  .memoryR13(memoryR13),
+	  .memoryR14(memoryR14),
+	  .memoryR15(memoryR15),
+	  .memoryR16(memoryR16),
+	  .memoryR17(memoryR17),
+	  .memoryR18(memoryR18),
+	  .memoryR19(memoryR19),
+	  .memoryR20(memoryR20),
+	  .memoryR21(memoryR21),
+	  .memoryR22(memoryR22),
+	  .memoryR23(memoryR23),
+	  .memoryR24(memoryR24),
+	  .memoryR25(memoryR25),
+	  .memoryR26(memoryR26),
+	  .memoryR27(memoryR27),
+	  .memoryR28(memoryR28),
+	  .memoryR29(memoryR29),
+	  .memoryR30(memoryR30),
+	  .memoryR31(memoryR31)
+  );
 
   
   // Displays: mostrar PC
 	reg [3:0] d0, d1, d2, d3, d4, d5;
 
-	wire [1:0] sel = switch1 ? 2'b01 :
-						  switch2 ? 2'b10 :
-						  switch3 ? 2'b11 : 2'b00;
+	wire [2:0] sel = switch1 ? 3'b010 :
+						  switch2 ? 3'b100 :
+						  switch3 ? 3'b110 : 
+						  switch4 ? 3'b111 : 3'b000;
 
 						  
 	always @(*) begin
 	  d0=0; d1=0; d2=0; d3=0; d4=0; d5=0;
 
 	  case (sel)
-		 2'b01: begin
+		 3'b010: begin
 			d0 = rdata1[3:0];    
 			d1 = rdata1[7:4];
 			d2 = rdata1[11:8];   
@@ -196,7 +315,7 @@ module top_level(
 			d5 = rdata1[23:20];
 		 end
 		 
-		 2'b10: begin
+		 3'b100: begin
 			d0 = rdata2Final[3:0];   
 			d1 = rdata2Final[7:4];
 			d2 = rdata2Final[11:8];  
@@ -205,13 +324,22 @@ module top_level(
 			d5 = rdata2Final[23:20];
 		 end
 		 
-		 2'b11: begin
+		 3'b110: begin
 			d0 = resultadoALU[3:0];    
 			d1 = resultadoALU[7:4];
 			d2 = resultadoALU[11:8];   
 			d3 = resultadoALU[15:12];
 			d4 = resultadoALU[19:16];  
 			d5 = resultadoALU[23:20];
+		 end
+		 
+		 3'b111: begin
+			d0 = salidaChimbaW[3:0];
+			d1 = salidaChimbaW[7:4];
+			d2 = salidaChimbaW[11:8];   
+			d3 = salidaChimbaR[3:0];
+			d4 = salidaChimbaR[7:4];  
+			d5 = salidaChimbaR[11:8];
 		 end
 		 
 		 default: begin

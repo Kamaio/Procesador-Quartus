@@ -54,7 +54,6 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
-set_global_assignment -name VERILOG_FILE top_level.v
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -73,8 +72,6 @@ set_location_assignment PIN_Y19 -to leds[6]
 set_location_assignment PIN_W20 -to leds[7]
 set_location_assignment PIN_W21 -to leds[8]
 set_location_assignment PIN_Y21 -to leds[9]
-set_global_assignment -name VERILOG_FILE pc.v
-set_global_assignment -name SYSTEMVERILOG_FILE hex7seg.sv
 set_location_assignment PIN_AE26 -to display0[0]
 set_location_assignment PIN_AE27 -to display0[1]
 set_location_assignment PIN_AE28 -to display0[2]
@@ -82,18 +79,12 @@ set_location_assignment PIN_AG27 -to display0[3]
 set_location_assignment PIN_AF28 -to display0[4]
 set_location_assignment PIN_AG28 -to display0[5]
 set_location_assignment PIN_AH28 -to display0[6]
-set_global_assignment -name SYSTEMVERILOG_FILE sumador.sv
-set_global_assignment -name SYSTEMVERILOG_FILE tb_top_level.sv
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
 set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH tb_top_level -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME tb_top_level -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id tb_top_level
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME tb_top_level -section_id tb_top_level
 set_global_assignment -name EDA_TEST_BENCH_FILE tb_top_level.sv -section_id tb_top_level
-set_global_assignment -name SYSTEMVERILOG_FILE ALU.sv
-set_global_assignment -name SYSTEMVERILOG_FILE register_unit.sv
-set_global_assignment -name SYSTEMVERILOG_FILE instructionMemory.sv
-set_global_assignment -name SYSTEMVERILOG_FILE control_unit.sv
 set_location_assignment PIN_AJ29 -to display1[0]
 set_location_assignment PIN_AH29 -to display1[1]
 set_location_assignment PIN_AH30 -to display1[2]
@@ -129,10 +120,56 @@ set_location_assignment PIN_AB27 -to display5[3]
 set_location_assignment PIN_AB26 -to display5[4]
 set_location_assignment PIN_AA26 -to display5[5]
 set_location_assignment PIN_AA25 -to display5[6]
+set_location_assignment PIN_AC12 -to switch1
+set_location_assignment PIN_AF9 -to switch2
+set_location_assignment PIN_AF10 -to switch3
+set_location_assignment PIN_AD11 -to switch4
+set_global_assignment -name VERILOG_FILE vgaClock/synthesis/submodules/vgaClock_video_pll_0_video_pll.v
+set_global_assignment -name VERILOG_FILE vgaClock/synthesis/submodules/vgaClock_video_pll_0.v
+set_global_assignment -name VERILOG_FILE vgaClock/synthesis/submodules/altera_up_avalon_reset_from_locked_signal.v
+set_global_assignment -name VERILOG_FILE vgaClock/synthesis/vgaClock.v
+set_global_assignment -name SYSTEMVERILOG_FILE font_renderer.sv
+set_global_assignment -name VERILOG_FILE top_level.v
+set_global_assignment -name VERILOG_FILE pc.v
+set_global_assignment -name SYSTEMVERILOG_FILE hex7seg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE sumador.sv
+set_global_assignment -name SYSTEMVERILOG_FILE tb_top_level.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ALU.sv
+set_global_assignment -name SYSTEMVERILOG_FILE register_unit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE instructionMemory.sv
+set_global_assignment -name SYSTEMVERILOG_FILE control_unit.sv
 set_global_assignment -name SYSTEMVERILOG_FILE Generador_Imm.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Mux.sv
-set_location_assignment PIN_AE12 -to switch1
-set_location_assignment PIN_AD10 -to switch2
-set_location_assignment PIN_AC9 -to switch3
 set_global_assignment -name SYSTEMVERILOG_FILE dataMemory.sv
+set_global_assignment -name SYSTEMVERILOG_FILE color.sv
+set_global_assignment -name SYSTEMVERILOG_FILE font_rom.sv
+set_location_assignment PIN_AF14 -to clkFPGA
+set_location_assignment PIN_AB12 -to switch0
+set_location_assignment PIN_AD12 -to switch5
+set_location_assignment PIN_J14 -to vga_blue[7]
+set_location_assignment PIN_G15 -to vga_blue[6]
+set_location_assignment PIN_F15 -to vga_blue[5]
+set_location_assignment PIN_H14 -to vga_blue[4]
+set_location_assignment PIN_F14 -to vga_blue[3]
+set_location_assignment PIN_H13 -to vga_blue[2]
+set_location_assignment PIN_G13 -to vga_blue[1]
+set_location_assignment PIN_B13 -to vga_blue[0]
+set_location_assignment PIN_A11 -to vga_clock
+set_location_assignment PIN_E11 -to vga_green[7]
+set_location_assignment PIN_F11 -to vga_green[6]
+set_location_assignment PIN_G12 -to vga_green[5]
+set_location_assignment PIN_G11 -to vga_green[4]
+set_location_assignment PIN_G10 -to vga_green[3]
+set_location_assignment PIN_H12 -to vga_green[2]
+set_location_assignment PIN_J10 -to vga_green[1]
+set_location_assignment PIN_J9 -to vga_green[0]
+set_location_assignment PIN_B11 -to vga_hsync
+set_location_assignment PIN_F13 -to vga_red[7]
+set_location_assignment PIN_E12 -to vga_red[6]
+set_location_assignment PIN_D12 -to vga_red[5]
+set_location_assignment PIN_C12 -to vga_red[4]
+set_location_assignment PIN_B12 -to vga_red[3]
+set_location_assignment PIN_E13 -to vga_red[2]
+set_location_assignment PIN_C13 -to vga_red[1]
+set_location_assignment PIN_A13 -to vga_red[0]
+set_location_assignment PIN_D11 -to vga_vsync
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

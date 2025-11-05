@@ -2,52 +2,164 @@
 Timing Analyzer Summary
 ------------------------------------------------------------
 
+Type  : Slow 1100mV 85C Model Setup 'clkFPGA'
+Slack : -10.557
+TNS   : -2139.019
+
+Type  : Slow 1100mV 85C Model Setup 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : -6.246
+TNS   : -6.246
+
 Type  : Slow 1100mV 85C Model Setup 'clk'
-Slack : -2.716
-TNS   : -70.123
+Slack : -5.337
+TNS   : -494.841
 
 Type  : Slow 1100mV 85C Model Hold 'clk'
-Slack : 0.365
+Slack : 0.221
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Hold 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.489
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Hold 'clkFPGA'
+Slack : 1.557
 TNS   : 0.000
 
 Type  : Slow 1100mV 85C Model Minimum Pulse Width 'clk'
 Slack : -0.394
-TNS   : -26.565
+TNS   : -92.066
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.500
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 5.295
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'clkFPGA'
+Slack : 9.387
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Setup 'clkFPGA'
+Slack : -10.271
+TNS   : -2054.324
+
+Type  : Slow 1100mV 0C Model Setup 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : -6.272
+TNS   : -6.272
 
 Type  : Slow 1100mV 0C Model Setup 'clk'
-Slack : -2.811
-TNS   : -73.253
+Slack : -5.221
+TNS   : -486.828
 
 Type  : Slow 1100mV 0C Model Hold 'clk'
-Slack : 0.369
+Slack : 0.207
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Hold 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.480
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Hold 'clkFPGA'
+Slack : 1.402
 TNS   : 0.000
 
 Type  : Slow 1100mV 0C Model Minimum Pulse Width 'clk'
 Slack : -0.394
-TNS   : -24.853
+TNS   : -85.011
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.500
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 5.256
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'clkFPGA'
+Slack : 9.309
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Setup 'clkFPGA'
+Slack : -5.753
+TNS   : -1113.345
 
 Type  : Fast 1100mV 85C Model Setup 'clk'
-Slack : -1.073
-TNS   : -21.999
+Slack : -2.993
+TNS   : -240.703
+
+Type  : Fast 1100mV 85C Model Setup 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : -1.951
+TNS   : -1.951
 
 Type  : Fast 1100mV 85C Model Hold 'clk'
-Slack : 0.198
+Slack : 0.130
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Hold 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.272
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Hold 'clkFPGA'
+Slack : 0.823
 TNS   : 0.000
 
 Type  : Fast 1100mV 85C Model Minimum Pulse Width 'clk'
-Slack : -0.328
-TNS   : -12.892
+Slack : -0.344
+TNS   : -44.407
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.500
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 5.553
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'clkFPGA'
+Slack : 9.411
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Setup 'clkFPGA'
+Slack : -5.259
+TNS   : -1022.649
 
 Type  : Fast 1100mV 0C Model Setup 'clk'
-Slack : -0.975
-TNS   : -19.533
+Slack : -2.604
+TNS   : -208.557
+
+Type  : Fast 1100mV 0C Model Setup 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : -1.496
+TNS   : -1.496
 
 Type  : Fast 1100mV 0C Model Hold 'clk'
-Slack : 0.186
+Slack : 0.120
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Hold 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.254
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Hold 'clkFPGA'
+Slack : 0.737
 TNS   : 0.000
 
 Type  : Fast 1100mV 0C Model Minimum Pulse Width 'clk'
-Slack : -0.312
-TNS   : -12.303
+Slack : -0.324
+TNS   : -42.019
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.500
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'color|vgaclock|video_pll_0|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 5.542
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'clkFPGA'
+Slack : 9.413
+TNS   : 0.000
 
 ------------------------------------------------------------
