@@ -82,7 +82,7 @@ module top_level(
   reg [31:0] dataFinal;
   
   
-  
+  //todos los registros
   wire [31:0] memoryR1;
   wire [31:0] memoryR2;
   wire [31:0] memoryR3;
@@ -92,6 +92,52 @@ module top_level(
   wire [31:0] memoryR7;
   wire [31:0] memoryR8;
   wire [31:0] memoryR9;
+  wire [31:0] memoryR10;
+  wire [31:0] memoryR11;
+  wire [31:0] memoryR12;
+  wire [31:0] memoryR13;
+  wire [31:0] memoryR14;
+  wire [31:0] memoryR15;
+  wire [31:0] memoryR16;
+  wire [31:0] memoryR17;
+  wire [31:0] memoryR18;
+  wire [31:0] memoryR19;
+  wire [31:0] memoryR20;
+  wire [31:0] memoryR21;
+  wire [31:0] memoryR22;
+  wire [31:0] memoryR23;
+  wire [31:0] memoryR24;
+  wire [31:0] memoryR25;
+  wire [31:0] memoryR26;
+  wire [31:0] memoryR27;
+  wire [31:0] memoryR28;
+  wire [31:0] memoryR29;
+  wire [31:0] memoryR30;
+  wire [31:0] memoryR31;
+  
+  
+  //toda la memoria
+  wire [7:0] memoryD0;
+  wire [7:0] memoryD1;
+  wire [7:0] memoryD2;
+  wire [7:0] memoryD3;
+  wire [7:0] memoryD4;
+  wire [7:0] memoryD5;
+  wire [7:0] memoryD6;
+  wire [7:0] memoryD7;
+  wire [7:0] memoryD8;
+  wire [7:0] memoryD9;
+  wire [7:0] memoryD10;
+  wire [7:0] memoryD11;
+  wire [7:0] memoryD12;
+  wire [7:0] memoryD13;
+  wire [7:0] memoryD14;
+  wire [7:0] memoryD15;
+  wire [7:0] memoryD16;
+  wire [7:0] memoryD17;
+  wire [7:0] memoryD18;
+  wire [7:0] memoryD19;
+  wire [7:0] memoryD20;
   
   
   
@@ -220,6 +266,30 @@ module top_level(
 	 .DMWR(DMWR),
 	 .DMCtrl(DMCtrl),
 	 .DataRd(DataRd),
+	 
+	 .memoryD0(memoryD0),
+	 .memoryD1(memoryD1),
+	 .memoryD2(memoryD2),
+	 .memoryD3(memoryD3),
+	 .memoryD4(memoryD4),
+	 .memoryD5(memoryD5),
+	 .memoryD6(memoryD6),
+	 .memoryD7(memoryD7),
+	 .memoryD8(memoryD8),
+	 .memoryD9(memoryD9),
+	 .memoryD10(memorD10),
+	 .memoryD11(memoryD11),
+	 .memoryD12(memoryD12),
+	 .memoryD13(memoryD13),
+	 .memoryD14(memoryD14),
+	 .memoryD15(memoryD15),
+	 .memoryD16(memoryD16),
+	 .memoryD17(memoryD17),
+	 .memoryD18(memoryD18),
+	 .memoryD19(memoryD19),
+	 .memoryD20(memoryD20),
+	 
+	 
 	 .salidaChimbaW(salidaChimbaW),
 	 .salidaChimbaR(salidaChimbaR)
   );
