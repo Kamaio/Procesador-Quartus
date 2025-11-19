@@ -34,27 +34,27 @@ module dataMemory(
 );
 
     reg [7:0] memoria [0:20]; // En memoria se gurda al contrario
-	 assign memoryR0   = memoria[0];//vga
-	 assign memoryR1   = memoria[1];
-    assign memoryR2   = memoria[2];
-    assign memoryR3   = memoria[3];
-	 assign memoryR4   = memoria[4];
-	 assign memoryR5   = memoria[5];
-	 assign memoryR6   = memoria[6];
-	 assign memoryR7   = memoria[7];
-	 assign memoryR8   = memoria[8];
-	 assign memoryR9   = memoria[9];
-	 assign memoryR10  = memoria[10];
-	 assign memoryR11  = memoria[11];
-	 assign memoryR12  = memoria[12];
-	 assign memoryR13  = memoria[13];
-	 assign memoryR14  = memoria[14];
-	 assign memoryR15  = memoria[15];
-	 assign memoryR16  = memoria[16];
-	 assign memoryR17  = memoria[17];
-	 assign memoryR18  = memoria[18];
-	 assign memoryR19  = memoria[19];
-	 assign memoryR20  = memoria[20];
+	 assign memoryD0   = memoria[0];//vga
+	 assign memoryD1   = memoria[1];
+    assign memoryD2   = memoria[2];
+    assign memoryD3   = memoria[3];
+	 assign memoryD4   = memoria[4];
+	 assign memoryD5   = memoria[5];
+	 assign memoryD6   = memoria[6];
+	 assign memoryD7   = memoria[7];
+	 assign memoryD8   = memoria[8];
+	 assign memoryD9   = memoria[9];
+	 assign memoryD10  = memoria[10];
+	 assign memoryD11  = memoria[11];
+	 assign memoryD12  = memoria[12];
+	 assign memoryD13  = memoria[13];
+	 assign memoryD14  = memoria[14];
+	 assign memoryD15  = memoria[15];
+	 assign memoryD16  = memoria[16];
+	 assign memoryD17  = memoria[17];
+	 assign memoryD18  = memoria[18];
+	 assign memoryD19  = memoria[19];
+	 assign memoryD20  = memoria[20];
 	 
 
     // Escritura sincrónica
@@ -74,7 +74,7 @@ module dataMemory(
                 end
             endcase
 				
-				salidaChimbaW = writeData[31:0];
+				salidaChimbaW = {memoria[address+3], memoria[address+2], memoria[address+1], memoria[address]};
         end
     end
 

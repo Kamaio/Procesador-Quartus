@@ -6,9 +6,10 @@ output wire [31:0] imm
 
 	always @(*) begin
     case (IMMSrc)
-      3'b000: imm = {{20{inst[31]}}, inst[31:20]};            // tipo i
-      3'b001: imm = {{20{inst[31]}}, inst[31:20]};            // tipo i carga
-		3'b010: imm = {{20{inst[31]}}, inst[31:25], inst[11:7]};//tipo S
+      3'b000: imm = {{20{inst[31]}}, inst[31:20]};                      // tipo i
+      3'b001: imm = {{20{inst[31]}}, inst[31:20]};                      // tipo i carga
+		3'b010: imm = {{20{inst[31]}}, inst[31:25], inst[11:7]};          //tipo S
+		//3'b011: imm = {{20{inst[31]}}, inst[7], inst[30:25], inst[11:8]}; //tipo B
 
       default: imm = 12'b0;
     endcase

@@ -28,6 +28,10 @@ module top_level(
   output vga_clock
 );
 
+	//Multiplexor Inicial
+  reg [31:0] PcFinal;
+	
+
   //PC
   wire [31:0] pc;
   wire [31:0] nextPC;
@@ -54,7 +58,9 @@ module top_level(
   wire RUWr;
   wire [2:0] IMMSrc;
   wire [3:0] ALUop;
+  wire ALUASrc;
   wire ALUBSrc;
+  wire [3:0] BrOp;
   
   wire DMWR;
   wire[2:0] DMCtrl;
@@ -66,12 +72,20 @@ module top_level(
   wire [31:0] rdata1, rdata2;
   
   
+  //multiplexorBranch
+  reg [31:0] rdata1Final;
+  
+  
   //multiplerxorImm
   reg [31:0] rdata2Final;
   
   
   //Salidas ALU
   wire [31:0] resultadoALU;
+  
+  
+  //Salida Branch Unit
+  wire resultadoBU;
   
   
   //salida dataMemory
@@ -156,11 +170,17 @@ module top_level(
   );
 
   
+ // Multiplexor inicio
+	always @(*) begin
+		PcFinal = resultadoBU ? resultadoALU : nextPC; 
+	end 
+
+  
   //Cambiar PC para todo el programa
   pc pcInst(
     .clk(clk),
     .rst_n(rst_n),
-    .nextPC(nextPC),
+    .nextPC(PcFinal),
     .address(pc)
   );
   
@@ -183,6 +203,8 @@ module top_level(
 	
 	.ALUop(ALUop),
 	.ALUBSrc(ALUBSrc),
+	.BrOp(BrOp),
+	.ALUASrc(ALUASrc),
 	
 	.DMWR(DMWR),
 	.DMCtrl(DMCtrl),
@@ -243,6 +265,13 @@ module top_level(
 	 .imm(imm)
 	);
 	
+	
+	//multiplexor A
+	always @(*) begin
+		rdata1Final = ALUASrc ? pc : rdata1;
+	end
+	
+	
 	//multiplexor B
 	always @(*) begin
 		rdata2Final = ALUBSrc ? imm : rdata2;
@@ -251,10 +280,19 @@ module top_level(
   
   //ALU
    ALU operaciones (
-    .valA(rdata1),
+    .valA(rdata1Final),
     .valB(rdata2Final),
 	 .operacion(ALUop),
     .resultado(resultadoALU)
+  );
+  
+  
+  //Branch Unit
+  branch_unit branch_unit(
+    .valA(rdata1),
+    .valB(rdata2),
+    .operacion(BrOp),
+    .resultado(resultadoBU)
   );
   
   
@@ -328,6 +366,8 @@ module top_level(
 	  .rdata2(rdata2),
 	  .ALUop(ALUop),
 	  .resultadoALU(dataFinal),
+	  .imm(imm),
+	  .Pc(PcFinal),
 	  
 	  .memoryR1(memoryR1),
 	  .memoryR2(memoryR2),
@@ -409,16 +449,16 @@ module top_level(
 			d2 = salidaChimbaW[11:8];   
 			d3 = salidaChimbaR[3:0];
 			d4 = salidaChimbaR[7:4];  
-			d5 = salidaChimbaR[11:8];
+			d5 = 1'b1;
 		 end
 		 
 		 default: begin
 			d0 = pc[3:0];
 			d1 = pc[7:4];
-			d2 = pc[11:8];
+			d2 = resultadoBU;
 			d3 = resultadoALU[3:0];
 			d4 = rdata2Final[3:0];
-			d5 = rdata1[3:0];
+			d5 = 2'd2;
 		 end
 		 
 	  endcase

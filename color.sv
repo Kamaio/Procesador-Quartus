@@ -21,7 +21,8 @@ module color(
   input [31:0] rdata2,
   input [3:0]  ALUop,
   input [31:0] resultadoALU,
-  input [31:0] PC,
+  input [31:0] imm,
+  input [31:0] Pc,
   
   
   input [31:0] memoryR1,
@@ -57,27 +58,27 @@ module color(
   input [31:0] memoryR31,
   
   
-  input [31:0] memoryD0,
-  input [31:0] memoryD1,
-  input [31:0] memoryD2,
-  input [31:0] memoryD3,
-  input [31:0] memoryD4,
-  input [31:0] memoryD5,
-  input [31:0] memoryD6,
-  input [31:0] memoryD7,
-  input [31:0] memoryD8,
-  input [31:0] memoryD9,
-  input [31:0] memoryD10,
-  input [31:0] memoryD11,
-  input [31:0] memoryD12,
-  input [31:0] memoryD13,
-  input [31:0] memoryD14,
-  input [31:0] memoryD15,
-  input [31:0] memoryD16,
-  input [31:0] memoryD17,
-  input [31:0] memoryD18,
-  input [31:0] memoryD19,
-  input [31:0] memoryD20
+  input [7:0] memoryD0,
+  input [7:0] memoryD1,
+  input [7:0] memoryD2,
+  input [7:0] memoryD3,
+  input [7:0] memoryD4,
+  input [7:0] memoryD5,
+  input [7:0] memoryD6,
+  input [7:0] memoryD7,
+  input [7:0] memoryD8,
+  input [7:0] memoryD9,
+  input [7:0] memoryD10,
+  input [7:0] memoryD11,
+  input [7:0] memoryD12,
+  input [7:0] memoryD13,
+  input [7:0] memoryD14,
+  input [7:0] memoryD15,
+  input [7:0] memoryD16,
+  input [7:0] memoryD17,
+  input [7:0] memoryD18,
+  input [7:0] memoryD19,
+  input [7:0] memoryD20
 
 );
 
@@ -197,6 +198,7 @@ module color(
     mensaje[2][7]  = ascii(rdata1[23:20]); mensaje[2][8]  = ascii(rdata1[19:16]);
     mensaje[2][9]  = ascii(rdata1[15:12]); mensaje[2][10] = ascii(rdata1[11:8]);
     mensaje[2][11] = ascii(rdata1[7:4]);   mensaje[2][12] = ascii(rdata1[3:0]);
+	 mensaje[2][13] = "(";   mensaje[2][14] = ")"; mensaje[2][15] = ascii(rs1[3:0]);
 	 
 	 
 	 
@@ -217,6 +219,7 @@ module color(
     mensaje[3][7]  = ascii(rdata2[23:20]); mensaje[3][8]  = ascii(rdata2[19:16]);
     mensaje[3][9]  = ascii(rdata2[15:12]); mensaje[3][10] = ascii(rdata2[11:8]);
     mensaje[3][11] = ascii(rdata2[7:4]);   mensaje[3][12] = ascii(rdata2[3:0]);
+	 mensaje[3][13] = "(";   mensaje[3][14] = ")"; mensaje[3][15] = ascii(rs2[3:0]);
 	 
 	 
 	 
@@ -230,13 +233,13 @@ module color(
 	 
 	 
 	 
-	 // Fila 4: Resultado que le llega a la register unit independiente de si es memory o ALU
-	 mensaje[4][0]  = "A"; mensaje[4][1]  = "L"; mensaje[4][2]  = "U";
-    mensaje[4][3]  = ":"; mensaje[4][4]  = " ";
-    mensaje[4][5]  = ascii(resultadoALU[31:28]); mensaje[4][6]  = ascii(resultadoALU[27:24]);
-    mensaje[4][7]  = ascii(resultadoALU[23:20]); mensaje[4][8]  = ascii(resultadoALU[19:16]);
-    mensaje[4][9]  = ascii(resultadoALU[15:12]); mensaje[4][10] = ascii(resultadoALU[11:8]);
-    mensaje[4][11] = ascii(resultadoALU[7:4]);   mensaje[4][12] = ascii(resultadoALU[3:0]);
+	 // Fila 4: resultado 2 final que le llega a la ALU
+	 mensaje[4][0]  = "R"; mensaje[4][1]  = "S"; mensaje[4][2]  = "2";
+    mensaje[4][3]  = "F"; mensaje[4][4]  = ":"; mensaje[4][5]  = " ";
+    mensaje[4][6]  = ascii(resultadoALU[31:28]); mensaje[4][7]  = ascii(resultadoALU[27:24]);
+    mensaje[4][8]  = ascii(resultadoALU[23:20]); mensaje[4][9]  = ascii(resultadoALU[19:16]);
+    mensaje[4][10]  = ascii(resultadoALU[15:12]); mensaje[4][11] = ascii(resultadoALU[11:8]);
+    mensaje[4][12] = ascii(resultadoALU[7:4]);   mensaje[4][13] = ascii(resultadoALU[3:0]);
 	 
 	 
 	 
@@ -250,10 +253,13 @@ module color(
 	 
 	 
 	 
-	 // Fila 5 ALUop
-    mensaje[5][0]  = "A"; mensaje[5][1]  = "L"; mensaje[5][2]  = "U";
-    mensaje[5][3]  = "o"; mensaje[5][4]  = "p"; mensaje[5][5]  = ": "; mensaje[5][6]  = " ";
-    mensaje[5][7]  = ascii(ALUop);
+	 // Fila 5: Resultado que le llega a la register unit independiente de si es memory o ALU
+	 mensaje[5][0]  = "A"; mensaje[5][1]  = "L"; mensaje[5][2]  = "U";
+    mensaje[5][3]  = ":"; mensaje[5][4]  = " ";
+    mensaje[5][5]  = ascii(resultadoALU[31:28]); mensaje[5][6]  = ascii(resultadoALU[27:24]);
+    mensaje[5][7]  = ascii(resultadoALU[23:20]); mensaje[5][8]  = ascii(resultadoALU[19:16]);
+    mensaje[5][9]  = ascii(resultadoALU[15:12]); mensaje[5][10] = ascii(resultadoALU[11:8]);
+    mensaje[5][11] = ascii(resultadoALU[7:4]);   mensaje[5][12] = ascii(resultadoALU[3:0]);
 	 
 	 
 	 
@@ -267,13 +273,10 @@ module color(
 	 
 	 
 	 
-	 //File 6: PC
-	 mensaje[6][0]  = "P"; mensaje[6][1]  = "C"; mensaje[6][2]  = ":";
-    mensaje[6][3]  = " ";
-    mensaje[6][4]  = ascii(PC[31:28]); mensaje[6][5]  = ascii(PC[27:24]);
-    mensaje[6][6]  = ascii(PC[23:20]); mensaje[6][7]  = ascii(PC[19:16]);
-	 mensaje[6][8]  = ascii(PC[15:12]); mensaje[6][9]  = ascii(PC[11:8]);
-	 mensaje[6][0]  = ascii(PC[7:4]);   mensaje[6][1]  = ascii(PC[3:0]);
+	 // Fila 6 ALUop
+    mensaje[6][0]  = "A"; mensaje[6][1]  = "L"; mensaje[6][2]  = "U";
+    mensaje[6][3]  = "o"; mensaje[6][4]  = "p"; mensaje[6][5]  = ":"; mensaje[6][6]  = " ";
+    mensaje[6][7]  = ascii(ALUop);
 	 
 	 
 	 
@@ -286,6 +289,17 @@ module color(
 	 mensaje[6][30]  = ascii(memoryR6[7:4]);   mensaje[6][31]  = ascii(memoryR6[3:0]);
 	 
 	 
+	 
+	 //File 7: imm
+	 mensaje[7][0]  = "I"; mensaje[7][1]  = "M"; mensaje[7][2]  = "M";
+    mensaje[7][3]  = ":";
+    mensaje[7][4]  = ascii(imm[31:28]); mensaje[7][5]  = ascii(imm[27:24]);
+    mensaje[7][6]  = ascii(imm[23:20]); mensaje[7][7]  = ascii(imm[19:16]);
+	 mensaje[7][8]  = ascii(imm[15:12]); mensaje[7][9]  = ascii(imm[11:8]);
+	 mensaje[7][10] = ascii(imm[7:4]);   mensaje[7][11] = ascii(imm[3:0]);
+	 
+	 
+	 
 	 //File 7.2: Registro X7
 	 mensaje[7][20]  = "X"; mensaje[7][21]  = "7"; mensaje[7][22]  = ":";
     mensaje[7][23]  = " ";
@@ -293,6 +307,17 @@ module color(
     mensaje[7][26]  = ascii(memoryR7[23:20]); mensaje[7][27]  = ascii(memoryR7[19:16]);
 	 mensaje[7][28]  = ascii(memoryR7[15:12]); mensaje[7][29]  = ascii(memoryR7[11:8]);
 	 mensaje[7][30]  = ascii(memoryR7[7:4]);   mensaje[7][31]  = ascii(memoryR7[3:0]);
+	 
+	 
+	 	  
+	 //File 8: PC
+	 mensaje[8][0]  = "P"; mensaje[8][1]  = "C"; mensaje[8][2]  = ":";
+    mensaje[8][3]  = " ";
+    mensaje[8][4]  = ascii(Pc[31:28]); mensaje[8][5]  = ascii(Pc[27:24]);
+    mensaje[8][6]  = ascii(Pc[23:20]); mensaje[8][7]  = ascii(Pc[19:16]);
+	 mensaje[8][8]  = ascii(Pc[15:12]); mensaje[8][9]  = ascii(Pc[11:8]);
+	 mensaje[8][10] = ascii(Pc[7:4]);   mensaje[8][11] = ascii(Pc[3:0]);
+	 
 	 
 	 
 	 //File 8.2: Registro X8
@@ -522,166 +547,165 @@ module color(
     //DATA MEMORY (Posición Modificada, Variable 'memoryD')
 
 	 // Fila 0.2: Registro D1
-    mensaje[0][40]  = "D"; mensaje[0][41]  = "1"; mensaje[0][42]  = ":";
-    mensaje[0][43]  = " ";
-    mensaje[0][44]  = ascii(memoryD0[31:28]); mensaje[0][45]  = ascii(memoryD0[27:24]);
-    mensaje[0][46]  = ascii(memoryD0[23:20]); mensaje[0][47]  = ascii(memoryD0[19:16]);
-    mensaje[0][48]  = ascii(memoryD0[15:12]); mensaje[0][49]  = ascii(memoryD0[11:8]);
-    mensaje[0][50]  = ascii(memoryD0[7:4]);   mensaje[0][51]  = ascii(memoryD0[3:0]);
+    mensaje[1][40]  = "D"; mensaje[1][41]  = "0"; mensaje[1][42]  = ":";
+    mensaje[1][43]  = " ";
+    mensaje[1][44]  = ascii(memoryD0[7:4]); mensaje[1][45]  = ascii(memoryD0[3:0]);
+    //mensaje[1][46]  = ascii(memoryD0[23:20]); mensaje[1][47]  = ascii(memoryD0[19:16]);
+    //mensaje[1][48]  = ascii(memoryD0[15:12]); mensaje[1][49]  = ascii(memoryD0[11:8]);
+    //mensaje[1][50]  = ascii(memoryD0[7:4]);   mensaje[1][51]  = ascii(memoryD0[3:0]);
 	 
 	 // Fila 1.2: Registro D2
-    mensaje[1][40]  = "D"; mensaje[1][41]  = "2"; mensaje[1][42]  = ":";
-    mensaje[1][43]  = " ";
-    mensaje[1][44]  = ascii(memoryD1[31:28]); mensaje[1][45]  = ascii(memoryD1[27:24]);
-    mensaje[1][46]  = ascii(memoryD1[23:20]); mensaje[1][47]  = ascii(memoryD1[19:16]);
-	 mensaje[1][48]  = ascii(memoryD1[15:12]); mensaje[1][49]  = ascii(memoryD1[11:8]);
-	 mensaje[1][50]  = ascii(memoryD1[7:4]);   mensaje[1][51]  = ascii(memoryD1[3:0]);
+    mensaje[2][40]  = "D"; mensaje[2][41]  = "1"; mensaje[2][42]  = ":";
+    mensaje[2][43]  = " ";
+    mensaje[2][44]  = ascii(memoryD1[7:4]); mensaje[2][45]  = ascii(memoryD1[3:0]);
+    //mensaje[2][46]  = ascii(memoryD1[23:20]); mensaje[2][47]  = ascii(memoryD1[19:16]);
+	 //mensaje[2][48]  = ascii(memoryD1[15:12]); mensaje[2][49]  = ascii(memoryD1[11:8]);
+	 //mensaje[2][50]  = ascii(memoryD1[7:4]);   mensaje[2][51]  = ascii(memoryD1[3:0]);
 	 
 	 // Fila 2.2: Registro D3
-    mensaje[2][40]  = "D"; mensaje[2][41]  = "3"; mensaje[2][42]  = ":";
-    mensaje[2][43]  = " ";
-    mensaje[2][44]  = ascii(memoryD2[31:28]); mensaje[2][45]  = ascii(memoryD2[27:24]);
-    mensaje[2][46]  = ascii(memoryD2[23:20]); mensaje[2][47]  = ascii(memoryD2[19:16]);
-	 mensaje[2][48]  = ascii(memoryD2[15:12]); mensaje[2][49]  = ascii(memoryD2[11:8]);
-	 mensaje[2][50]  = ascii(memoryD2[7:4]);   mensaje[2][51]  = ascii(memoryD2[3:0]);
-	 
-	 //File 3.2: Registro D4
-	 mensaje[3][40]  = "D"; mensaje[3][41]  = "4"; mensaje[3][42]  = ":";
+    mensaje[3][40]  = "D"; mensaje[3][41]  = "2"; mensaje[3][42]  = ":";
     mensaje[3][43]  = " ";
-    mensaje[3][44]  = ascii(memoryD3[31:28]); mensaje[3][45]  = ascii(memoryD3[27:24]);
-    mensaje[3][46]  = ascii(memoryD3[23:20]); mensaje[3][47]  = ascii(memoryD3[19:16]);
-	 mensaje[3][48]  = ascii(memoryD3[15:12]); mensaje[3][49]  = ascii(memoryD3[11:8]);
-	 mensaje[3][50]  = ascii(memoryD3[7:4]);   mensaje[3][51]  = ascii(memoryD3[3:0]);
+    mensaje[3][44]  = ascii(memoryD2[7:4]); mensaje[3][45]  = ascii(memoryD2[3:0]);
+    //mensaje[3][46]  = ascii(memoryD2[23:20]); mensaje[3][47]  = ascii(memoryD2[19:16]);
+	 //mensaje[3][48]  = ascii(memoryD2[15:12]); mensaje[3][49]  = ascii(memoryD2[11:8]);
+	 //mensaje[3][50]  = ascii(memoryD2[7:4]);   mensaje[3][51]  = ascii(memoryD2[3:0]);
+	 
+	 mensaje[4][40]  = "D"; mensaje[4][41]  = "3"; mensaje[4][42]  = ":";
+    mensaje[4][43]  = " ";
+    mensaje[4][44]  = ascii(memoryD3[7:4]); mensaje[4][45]  = ascii(memoryD3[3:0]);
+    //mensaje[4][46]  = ascii(memoryD3[23:20]); mensaje[4][47]  = ascii(memoryD3[19:16]);
+	 //mensaje[4][48]  = ascii(memoryD3[15:12]); mensaje[4][49]  = ascii(memoryD3[11:8]);
+	 //mensaje[4][50]  = ascii(memoryD3[7:4]);   mensaje[4][51]  = ascii(memoryD3[3:0]);
 	 
 	 //File 4.2: Registro D5
-	 mensaje[4][40]  = "D"; mensaje[4][41]  = "5"; mensaje[4][42]  = ":";
-    mensaje[4][43]  = " ";
-    mensaje[4][44]  = ascii(memoryD4[31:28]); mensaje[4][45]  = ascii(memoryD4[27:24]);
-    mensaje[4][46]  = ascii(memoryD4[23:20]); mensaje[4][47]  = ascii(memoryD4[19:16]);
-	 mensaje[4][48]  = ascii(memoryD4[15:12]); mensaje[4][49]  = ascii(memoryD4[11:8]);
-	 mensaje[4][50]  = ascii(memoryD4[7:4]);   mensaje[4][51]  = ascii(memoryD4[3:0]);
+	 mensaje[5][40]  = "D"; mensaje[5][41]  = "4"; mensaje[5][42]  = ":";
+    mensaje[5][43]  = " ";
+    mensaje[5][44]  = ascii(memoryD4[7:4]); mensaje[5][45]  = ascii(memoryD4[3:0]);
+    //mensaje[5][46]  = ascii(memoryD4[23:20]); mensaje[5][47]  = ascii(memoryD4[19:16]);
+	 //mensaje[5][48]  = ascii(memoryD4[15:12]); mensaje[5][49]  = ascii(memoryD4[11:8]);
+	 //mensaje[5][50]  = ascii(memoryD4[7:4]);   mensaje[5][51]  = ascii(memoryD4[3:0]);
 	 
 	 //File 5.2: Registro D6
-	 mensaje[5][40]  = "D"; mensaje[5][41]  = "6"; mensaje[5][42]  = ":";
-    mensaje[5][43]  = " ";
-    mensaje[5][44]  = ascii(memoryD5[31:28]); mensaje[5][45]  = ascii(memoryD5[27:24]);
-    mensaje[5][46]  = ascii(memoryD5[23:20]); mensaje[5][47]  = ascii(memoryD5[19:16]);
-	 mensaje[5][48]  = ascii(memoryD5[15:12]); mensaje[5][49]  = ascii(memoryD5[11:8]);
-	 mensaje[5][50]  = ascii(memoryD5[7:4]);   mensaje[5][51]  = ascii(memoryD5[3:0]);
+	 mensaje[6][40]  = "D"; mensaje[6][41]  = "5"; mensaje[6][42]  = ":";
+    mensaje[6][43]  = " ";
+    mensaje[6][44]  = ascii(memoryD5[7:4]); mensaje[6][45]  = ascii(memoryD5[3:0]);
+    //mensaje[6][46]  = ascii(memoryD5[23:20]); mensaje[6][47]  = ascii(memoryD5[19:16]);
+	 //mensaje[6][48]  = ascii(memoryD5[15:12]); mensaje[6][49]  = ascii(memoryD5[11:8]);
+	 //mensaje[6][50]  = ascii(memoryD5[7:4]);   mensaje[6][51]  = ascii(memoryD5[3:0]);
 	 
 	 //File 6.2: Registro D7
-	 mensaje[6][40]  = "D"; mensaje[6][41]  = "7"; mensaje[6][42]  = ":";
-    mensaje[6][43]  = " ";
-    mensaje[6][44]  = ascii(memoryD6[31:28]); mensaje[6][45]  = ascii(memoryD6[27:24]);
-    mensaje[6][46]  = ascii(memoryD6[23:20]); mensaje[6][47]  = ascii(memoryD6[19:16]);
-	 mensaje[6][48]  = ascii(memoryD6[15:12]); mensaje[6][49]  = ascii(memoryD6[11:8]);
-	 mensaje[6][50]  = ascii(memoryD6[7:4]);   mensaje[6][51]  = ascii(memoryD6[3:0]);
+	 mensaje[7][40]  = "D"; mensaje[7][41]  = "6"; mensaje[7][42]  = ":";
+    mensaje[7][43]  = " ";
+    mensaje[7][44]  = ascii(memoryD6[7:4]); mensaje[7][45]  = ascii(memoryD6[3:0]);
+    //mensaje[7][46]  = ascii(memoryD6[23:20]); mensaje[7][47]  = ascii(memoryD6[19:16]);
+	 //mensaje[7][48]  = ascii(memoryD6[15:12]); mensaje[7][49]  = ascii(memoryD6[11:8]);
+	 //mensaje[7][50]  = ascii(memoryD6[7:4]);   mensaje[7][51]  = ascii(memoryD6[3:0]);
 	 
 	 //File 7.2: Registro D8
-	 mensaje[7][40]  = "D"; mensaje[7][41]  = "8"; mensaje[7][42]  = ":";
-    mensaje[7][43]  = " ";
-    mensaje[7][44]  = ascii(memoryD7[31:28]); mensaje[7][45]  = ascii(memoryD7[27:24]);
-    mensaje[7][46]  = ascii(memoryD7[23:20]); mensaje[7][47]  = ascii(memoryD7[19:16]);
-	 mensaje[7][48]  = ascii(memoryD7[15:12]); mensaje[7][49]  = ascii(memoryD7[11:8]);
-	 mensaje[7][50]  = ascii(memoryD7[7:4]);   mensaje[7][51]  = ascii(memoryD7[3:0]);
+	 mensaje[8][40]  = "D"; mensaje[8][41]  = "7"; mensaje[8][42]  = ":";
+    mensaje[8][43]  = " ";
+    mensaje[8][44]  = ascii(memoryD7[7:4]); mensaje[8][45]  = ascii(memoryD7[3:0]);
+    //mensaje[8][46]  = ascii(memoryD7[23:20]); mensaje[8][47]  = ascii(memoryD7[19:16]);
+	 //mensaje[8][48]  = ascii(memoryD7[15:12]); mensaje[8][49]  = ascii(memoryD7[11:8]);
+	 //mensaje[8][50]  = ascii(memoryD7[7:4]);   mensaje[8][51]  = ascii(memoryD7[3:0]);
 	 
 	 //File 8.2: Registro D9
-	 mensaje[8][40]  = "D"; mensaje[8][41]  = "9"; mensaje[8][42]  = ":";
-    mensaje[8][43]  = " ";
-    mensaje[8][44]  = ascii(memoryD8[31:28]); mensaje[8][45]  = ascii(memoryD8[27:24]);
-    mensaje[8][46]  = ascii(memoryD8[23:20]); mensaje[8][47]  = ascii(memoryD8[19:16]);
-	 mensaje[8][48]  = ascii(memoryD8[15:12]); mensaje[8][49]  = ascii(memoryD8[11:8]);
-	 mensaje[8][50]  = ascii(memoryD8[7:4]);   mensaje[8][51]  = ascii(memoryD8[3:0]);
+	 mensaje[9][40]  = "D"; mensaje[9][41]  = "8"; mensaje[9][42]  = ":";
+    mensaje[9][43]  = " ";
+    mensaje[9][44]  = ascii(memoryD8[7:4]); mensaje[9][45]  = ascii(memoryD8[3:0]);
+    //mensaje[9][46]  = ascii(memoryD8[23:20]); mensaje[9][47]  = ascii(memoryD8[19:16]);
+	 //mensaje[9][48]  = ascii(memoryD8[15:12]); mensaje[9][49]  = ascii(memoryD8[11:8]);
+	 //mensaje[9][50]  = ascii(memoryD8[7:4]);   mensaje[9][51]  = ascii(memoryD8[3:0]);
 	 
 	 //File 9.2: Registro DA
-	 mensaje[9][40]  = "D"; mensaje[9][41]  = "A"; mensaje[9][42]  = ":";
-    mensaje[9][43]  = " ";
-    mensaje[9][44]  = ascii(memoryD9[31:28]); mensaje[9][45]  = ascii(memoryD9[27:24]);
-    mensaje[9][46]  = ascii(memoryD9[23:20]); mensaje[9][47]  = ascii(memoryD9[19:16]);
-	 mensaje[9][48]  = ascii(memoryD9[15:12]); mensaje[9][49]  = ascii(memoryD9[11:8]);
-	 mensaje[9][50]  = ascii(memoryD9[7:4]);   mensaje[9][51]  = ascii(memoryD9[3:0]);
+	 mensaje[10][40]  = "D"; mensaje[10][41]  = "9"; mensaje[10][42]  = ":";
+    mensaje[10][43]  = " ";
+    mensaje[10][44]  = ascii(memoryD9[7:4]); mensaje[10][45]  = ascii(memoryD9[3:0]);
+    //mensaje[10][46]  = ascii(memoryD9[23:20]); mensaje[10][47]  = ascii(memoryD9[19:16]);
+	 //mensaje[10][48]  = ascii(memoryD9[15:12]); mensaje[10][49]  = ascii(memoryD9[11:8]);
+	 //mensaje[10][50]  = ascii(memoryD9[7:4]);   mensaje[10][51]  = ascii(memoryD9[3:0]);
 	 
 	 //File 10.2: Registro DB
-	 mensaje[10][40]  = "D"; mensaje[10][41]  = "B"; mensaje[10][42]  = ":";
-    mensaje[10][43]  = " ";
-    mensaje[10][44]  = ascii(memoryD10[31:28]); mensaje[10][45]  = ascii(memoryD10[27:24]);
-    mensaje[10][46]  = ascii(memoryD10[23:20]); mensaje[10][47]  = ascii(memoryD10[19:16]);
-	 mensaje[10][48]  = ascii(memoryD10[15:12]); mensaje[10][49]  = ascii(memoryD10[11:8]);
-	 mensaje[10][50]  = ascii(memoryD10[7:4]);   mensaje[10][51]  = ascii(memoryD10[3:0]);
+	 mensaje[11][40]  = "D"; mensaje[11][41]  = "A"; mensaje[11][42]  = ":";
+    mensaje[11][43]  = " ";
+    mensaje[11][44]  = ascii(memoryD10[7:4]); mensaje[11][45]  = ascii(memoryD10[3:0]);
+    //mensaje[11][46]  = ascii(memoryD10[23:20]); mensaje[11][47]  = ascii(memoryD10[19:16]);
+	 //mensaje[11][48]  = ascii(memoryD10[15:12]); mensaje[11][49]  = ascii(memoryD10[11:8]);
+	 //mensaje[11][50]  = ascii(memoryD10[7:4]);   mensaje[11][51]  = ascii(memoryD10[3:0]);
 	 
 	 //File 11.2: Registro DC
-	 mensaje[11][40]  = "D"; mensaje[11][41]  = "C"; mensaje[11][42]  = ":";
-    mensaje[11][43]  = " ";
-    mensaje[11][44]  = ascii(memoryD11[31:28]); mensaje[11][45]  = ascii(memoryD11[27:24]);
-    mensaje[11][46]  = ascii(memoryD11[23:20]); mensaje[11][47]  = ascii(memoryD11[19:16]);
-	 mensaje[11][48]  = ascii(memoryD11[15:12]); mensaje[11][49]  = ascii(memoryD11[11:8]);
-	 mensaje[11][50]  = ascii(memoryD11[7:4]);   mensaje[11][51]  = ascii(memoryD11[3:0]);
+	 mensaje[12][40]  = "D"; mensaje[12][41]  = "B"; mensaje[12][42]  = ":";
+    mensaje[12][43]  = " ";
+    mensaje[12][44]  = ascii(memoryD11[7:4]); mensaje[12][45]  = ascii(memoryD11[3:0]);
+    //mensaje[12][46]  = ascii(memoryD11[23:20]); mensaje[12][47]  = ascii(memoryD11[19:16]);
+	// mensaje[12][48]  = ascii(memoryD11[15:12]); mensaje[12][49]  = ascii(memoryD11[11:8]);
+	 //mensaje[12][50]  = ascii(memoryD11[7:4]);   mensaje[12][51]  = ascii(memoryD11[3:0]);
 	 
 	 //File 12.2: Registro DD
-	 mensaje[12][40]  = "D"; mensaje[12][41]  = "D"; mensaje[12][42]  = ":";
-    mensaje[12][43]  = " ";
-    mensaje[12][44]  = ascii(memoryD12[31:28]); mensaje[12][45]  = ascii(memoryD12[27:24]);
-    mensaje[12][46]  = ascii(memoryD12[23:20]); mensaje[12][47]  = ascii(memoryD12[19:16]);
-	 mensaje[12][48]  = ascii(memoryD12[15:12]); mensaje[12][49]  = ascii(memoryD12[11:8]);
-	 mensaje[12][50]  = ascii(memoryD12[7:4]);   mensaje[12][51]  = ascii(memoryD12[3:0]);
+	 mensaje[13][40]  = "D"; mensaje[13][41]  = "C"; mensaje[13][42]  = ":";
+    mensaje[13][43]  = " ";
+    mensaje[13][44]  = ascii(memoryD12[7:4]); mensaje[13][45]  = ascii(memoryD12[3:0]);
+    //mensaje[13][46]  = ascii(memoryD12[23:20]); mensaje[13][47]  = ascii(memoryD12[19:16]);
+	 //mensaje[13][48]  = ascii(memoryD12[15:12]); mensaje[13][49]  = ascii(memoryD12[11:8]);
+	 //mensaje[13][50]  = ascii(memoryD12[7:4]);   mensaje[13][51]  = ascii(memoryD12[3:0]);
 	 
 	 //File 13.2: Registro DE
-	 mensaje[13][40]  = "D"; mensaje[13][41]  = "E"; mensaje[13][42]  = ":";
-    mensaje[13][43]  = " ";
-    mensaje[13][44]  = ascii(memoryD13[31:28]); mensaje[13][45]  = ascii(memoryD13[27:24]);
-    mensaje[13][46]  = ascii(memoryD13[23:20]); mensaje[13][47]  = ascii(memoryD13[19:16]);
-	 mensaje[13][48]  = ascii(memoryD13[15:12]); mensaje[13][49]  = ascii(memoryD13[11:8]);
-	 mensaje[13][50]  = ascii(memoryD13[7:4]);   mensaje[13][51]  = ascii(memoryD13[3:0]);
+	 mensaje[14][40]  = "D"; mensaje[14][41]  = "D"; mensaje[14][42]  = ":";
+    mensaje[14][43]  = " ";
+    mensaje[14][44]  = ascii(memoryD13[7:4]); mensaje[14][45]  = ascii(memoryD13[3:0]);
+    //mensaje[14][46]  = ascii(memoryD13[23:20]); mensaje[14][47]  = ascii(memoryD13[19:16]);
+	 //mensaje[14][48]  = ascii(memoryD13[15:12]); mensaje[14][49]  = ascii(memoryD13[11:8]);
+	 //mensaje[14][50]  = ascii(memoryD13[7:4]);   mensaje[14][51]  = ascii(memoryD13[3:0]);
 	 
 	 //File 14.2: Registro DF
-	 mensaje[14][40]  = "D"; mensaje[14][41]  = "F"; mensaje[14][42]  = ":";
-    mensaje[14][43]  = " ";
-    mensaje[14][44]  = ascii(memoryD14[31:28]); mensaje[14][45]  = ascii(memoryD14[27:24]);
-    mensaje[14][46]  = ascii(memoryD14[23:20]); mensaje[14][47]  = ascii(memoryD14[19:16]);
-	 mensaje[14][48]  = ascii(memoryD14[15:12]); mensaje[14][49]  = ascii(memoryD14[11:8]);
-	 mensaje[14][50]  = ascii(memoryD14[7:4]);   mensaje[14][51]  = ascii(memoryD14[3:0]);
+	 mensaje[15][40]  = "D"; mensaje[15][41]  = "E"; mensaje[15][42]  = ":";
+    mensaje[15][43]  = " ";
+    mensaje[15][44]  = ascii(memoryD14[7:4]); mensaje[15][45]  = ascii(memoryD14[3:0]);
+    //mensaje[15][46]  = ascii(memoryD14[23:20]); mensaje[15][47]  = ascii(memoryD14[19:16]);
+	 //mensaje[15][48]  = ascii(memoryD14[15:12]); mensaje[15][49]  = ascii(memoryD14[11:8]);
+	 //mensaje[15][50]  = ascii(memoryD14[7:4]);   mensaje[15][51]  = ascii(memoryD14[3:0]);
 	 
-	 // Fila 15.2 Registro X10
-    mensaje[15][40]  = "D"; mensaje[15][41] = "1"; mensaje[15][42]  = "0"; mensaje[15][43]  = ":"; mensaje[15][44]  = " ";
-    mensaje[15][45]  = ascii(memoryD15[31:28]);  mensaje[15][46]  = ascii(memoryD15[27:24]);
-    mensaje[15][47]  = ascii(memoryD15[23:20]);  mensaje[15][48]  = ascii(memoryD15[19:16]);
-    mensaje[15][49]  = ascii(memoryD15[15:12]);  mensaje[15][50]  = ascii(memoryD15[11:8]);
-    mensaje[15][51]  = ascii(memoryD15[7:4]);    mensaje[15][52]  = ascii(memoryD15[3:0]);
+	 // Fila 16.2 Registro X10
+    mensaje[16][40]  = "D"; mensaje[16][41] = "F"; mensaje[16][42]  = ":"; mensaje[16][43]  = " "; mensaje[16][44]  = " ";
+    mensaje[16][45]  = ascii(memoryD15[7:4]);  mensaje[16][46]  = ascii(memoryD15[3:0]);
+    //mensaje[16][47]  = ascii(memoryD15[23:20]);  mensaje[16][48]  = ascii(memoryD15[19:16]);
+    //mensaje[16][49]  = ascii(memoryD15[15:12]);  mensaje[16][50]  = ascii(memoryD15[11:8]);
+    //mensaje[16][51]  = ascii(memoryD15[7:4]);    mensaje[16][52]  = ascii(memoryD15[3:0]);
 
-    // Fila 16.2 Registro X11
-    mensaje[16][40]  = "D"; mensaje[16][41]  = "1"; mensaje[16][42] = "1"; mensaje[16][43]  = ":"; mensaje[16][44]  = " ";
-    mensaje[16][45]  = ascii(memoryD16[31:28]);   mensaje[16][46] = ascii(memoryD16[27:24]);
-    mensaje[16][47]  = ascii(memoryD16[23:20]);   mensaje[16][48] = ascii(memoryD16[19:16]);
-    mensaje[16][49]  = ascii(memoryD16[15:12]);   mensaje[16][50] = ascii(memoryD16[11:8]);
-    mensaje[16][51]  = ascii(memoryD16[7:4]);     mensaje[16][52] = ascii(memoryD16[3:0]);
+    // Fila 17.2 Registro X11
+    mensaje[17][40]  = "D"; mensaje[17][41]  = "1"; mensaje[17][42] = "0"; mensaje[17][43]  = ":"; mensaje[17][44]  = " ";
+    mensaje[17][45]  = ascii(memoryD16[7:4]);   mensaje[17][46] = ascii(memoryD16[3:0]);
+    //mensaje[17][47]  = ascii(memoryD16[23:20]);   mensaje[17][48] = ascii(memoryD16[19:16]);
+    //mensaje[17][49]  = ascii(memoryD16[15:12]);   mensaje[17][50] = ascii(memoryD16[11:8]);
+    //mensaje[17][51]  = ascii(memoryD16[7:4]);     mensaje[17][52] = ascii(memoryD16[3:0]);
 
-    // Fila 17.2 Registro X12
-    mensaje[17][40]  = "D"; mensaje[17][41]  = "1"; mensaje[17][42] = "2"; mensaje[17][43]  = ":"; mensaje[17][44]  = " ";
-    mensaje[17][45]  = ascii(memoryD17[31:28]);   mensaje[17][46] = ascii(memoryD17[27:24]);
-    mensaje[17][47]  = ascii(memoryD17[23:20]);   mensaje[17][48] = ascii(memoryD17[19:16]);
-    mensaje[17][49]  = ascii(memoryD17[15:12]);   mensaje[17][50] = ascii(memoryD17[11:8]);
-    mensaje[17][51]  = ascii(memoryD17[7:4]);     mensaje[17][52] = ascii(memoryD17[3:0]);
+    // Fila 18.2 Registro X12
+    mensaje[18][40]  = "D"; mensaje[18][41]  = "1"; mensaje[18][42] = "1"; mensaje[18][43]  = ":"; mensaje[18][44]  = " ";
+    mensaje[18][45]  = ascii(memoryD17[7:4]);   mensaje[18][46] = ascii(memoryD17[3:0]);
+    //mensaje[18][47]  = ascii(memoryD17[23:20]);   mensaje[18][48] = ascii(memoryD17[19:16]);
+    //mensaje[18][49]  = ascii(memoryD17[15:12]);   mensaje[18][50] = ascii(memoryD17[11:8]);
+    //mensaje[18][51]  = ascii(memoryD17[7:4]);     mensaje[18][52] = ascii(memoryD17[3:0]);
 
-    // Fila 18.2 Registro X13
-    mensaje[18][40]  = "D"; mensaje[18][41]  = "1"; mensaje[18][42]  = "3"; mensaje[18][43]  = ":"; mensaje[18][44]  = " ";
-    mensaje[18][45]  = ascii(memoryD18[31:28]);   mensaje[18][46]  = ascii(memoryD18[27:24]);
-    mensaje[18][47]  = ascii(memoryD18[23:20]);   mensaje[18][48]  = ascii(memoryD18[19:16]);
-    mensaje[18][49]  = ascii(memoryD18[15:12]);   mensaje[18][50]  = ascii(memoryD18[11:8]);
-    mensaje[18][51]  = ascii(memoryD18[7:4]);     mensaje[18][52]  = ascii(memoryD18[3:0]);
+    // Fila 19.2 Registro X13
+    mensaje[19][40]  = "D"; mensaje[19][41]  = "1"; mensaje[19][42]  = "2"; mensaje[19][43]  = ":"; mensaje[19][44]  = " ";
+    mensaje[19][45]  = ascii(memoryD18[7:4]);   mensaje[19][46]  = ascii(memoryD18[3:0]);
+    //mensaje[19][47]  = ascii(memoryD18[23:20]);   mensaje[19][48]  = ascii(memoryD18[19:16]);
+    //mensaje[19][49]  = ascii(memoryD18[15:12]);   mensaje[19][50]  = ascii(memoryD18[11:8]);
+    //mensaje[19][51]  = ascii(memoryD18[7:4]);     mensaje[19][52]  = ascii(memoryD18[3:0]);
 
-    // Fila 19.2 Registro X14
-    mensaje[19][40] = "D"; mensaje[19][41] = "1"; mensaje[19][42] = "4"; mensaje[19][43] = ":"; mensaje[19][44] = " ";
-    mensaje[19][45] = ascii(memoryD19[31:28]); mensaje[19][46] = ascii(memoryD19[27:24]);
-    mensaje[19][47] = ascii(memoryD19[23:20]); mensaje[19][48] = ascii(memoryD19[19:16]);
-    mensaje[19][49] = ascii(memoryD19[15:12]); mensaje[19][50] = ascii(memoryD19[11:8]);
-    mensaje[19][51] = ascii(memoryD19[7:4]);   mensaje[19][52] = ascii(memoryD19[3:0]);
+    // Fila 20.2 Registro X14
+    mensaje[20][40] = "D"; mensaje[20][41] = "1"; mensaje[20][42] = "3"; mensaje[20][43] = ":"; mensaje[20][44] = " ";
+    mensaje[20][45] = ascii(memoryD19[7:4]); mensaje[20][46] = ascii(memoryD19[3:0]);
+    //mensaje[20][47] = ascii(memoryD19[23:20]); mensaje[20][48] = ascii(memoryD19[19:16]);
+    //mensaje[20][49] = ascii(memoryD19[15:12]); mensaje[20][50] = ascii(memoryD19[11:8]);
+    //mensaje[20][51] = ascii(memoryD19[7:4]);   mensaje[20][52] = ascii(memoryD19[3:0]);
 
-    // Fila 20.2 Registro X15
-    mensaje[20][40] = "D"; mensaje[20][41] = "1"; mensaje[20][42] = "5"; mensaje[20][43] = ":"; mensaje[20][44] = " ";
-    mensaje[20][45] = ascii(memoryD20[31:28]); mensaje[20][46] = ascii(memoryD20[27:24]);
-    mensaje[20][47] = ascii(memoryD20[23:20]); mensaje[20][48] = ascii(memoryD20[19:16]);
-    mensaje[20][49] = ascii(memoryD20[15:12]); mensaje[20][50] = ascii(memoryD20[11:8]);
-    mensaje[20][51] = ascii(memoryD20[7:4]);   mensaje[20][52] = ascii(memoryD20[3:0]);
+    // Fila 21.2 Registro X15
+    mensaje[21][40] = "D"; mensaje[21][41] = "1"; mensaje[21][42] = "4"; mensaje[21][43] = ":"; mensaje[21][44] = " ";
+    mensaje[21][45] = ascii(memoryD20[7:4]); mensaje[21][46] = ascii(memoryD20[3:0]);
+    //mensaje[21][47] = ascii(memoryD20[23:20]); mensaje[21][48] = ascii(memoryD20[19:16]);
+    //mensaje[21][49] = ascii(memoryD20[15:12]); mensaje[21][50] = ascii(memoryD20[11:8]);
+    //mensaje[21][51] = ascii(memoryD20[7:4]);   mensaje[21][52] = ascii(memoryD20[3:0]);
 
 	 
 

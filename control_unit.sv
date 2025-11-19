@@ -11,6 +11,8 @@ output wire [2:0] IMMSrc,
 //execute
 output reg [3:0] ALUop,
 output reg ALUBSrc,
+output reg [3:0] BrOp, 
+output reg ALUASrc,
 
 //memory
 output reg DMWR,
@@ -29,9 +31,12 @@ always @(*) begin
 	case (opcode)
 		7'b0110011: begin        //tipo r
 			RUWr = 1'b1;
+			ALUASrc = 1'b0;       //multiplexor A
 			ALUBSrc = 1'b0;       //multiplexor B
 			RUDataWrSrc = 2'b0;   //deja pasara el resultado de la ALU
-			DMWR = 1'b0;			// Permiso de escribir en la data memory
+			DMWR = 1'b0;			 // Permiso de escribir en la data memory
+			
+			BrOp = 4'b0000;       //apaga la branch unit
 			
 			case (combinacion)
 				10'b0000000000: ALUop = 4'b0000; // add
@@ -53,9 +58,12 @@ always @(*) begin
 		7'b0010011: begin
 			RUWr = 1'b1;
 			IMMSrc  = 3'b000;     // tipo i
-			ALUBSrc = 1'b1;       // permiso mux
+			ALUASrc = 1'b0;       //multiplexor A
+			ALUBSrc = 1'b1;       //multiplexor B
 			RUDataWrSrc = 2'b0;   //deja pasara el resultado de la ALU
 			DMWR = 1'b0;
+			
+			BrOp = 4'b0000;       //apaga la branch unit
 			
 			case (funct3)
 				3'b000: ALUop = 4'b0000; // add
@@ -74,7 +82,8 @@ always @(*) begin
       7'b0000011: begin
 			RUWr = 1'b1;
 			IMMSrc  = 3'b001;     // tipo i de carga
-			ALUBSrc = 1'b1;       // permiso mux
+			ALUASrc = 1'b0;       // multiplexor A
+			ALUBSrc = 1'b1;       // multiplexor B
 			ALUop = 4'b0000;      // add
 			
 			DMWR = 1'b0;          // tipo I de carga
@@ -82,19 +91,43 @@ always @(*) begin
 			DMCtrl = funct3;      //aca se decide cuantos bits se agarra de la memoria
 			RUDataWrSrc = 2'b01;  //deja pasar el resultado de la data memory
 			
+			BrOp = 4'b0000;       //apaga la branch unit
+			
 		end
 		
       7'b0100011: begin
 			RUWr = 1'b0;          //le dice a la register unit que no escriba nada
 			IMMSrc = 3'b010;      // tipo S
-			ALUBSrc = 1'b1;       // permiso mux
+			ALUASrc = 1'b0;       // multiplexor A
+			ALUBSrc = 1'b1;       // multiplexor B
+			ALUop = 4'b0000;      // add(problema explicar a andrea)
 			
 			DMWR = 1'b1;          //escribir en la data memory
 			
 			DMCtrl = funct3;
 			RUDataWrSrc = 2'b01;  //mux de data memory pero esto deberia dar igual porque no escribe nada en la register unit
+			
+			BrOp = 4'b0000;       //apaga la branch unit
 		end
 
+		7'b1100011: begin			//tipo B
+			RUWr = 1'b1;         
+			IMMSrc = 3'b011;
+			ALUASrc = 1'b1;      //multiplerxor A manda el pc en vez de el registro rs1
+			ALUBSrc = 1'b1;      //multiplexor B
+			ALUop = 4'b0000;     //add
+			
+			DMWR = 1'b0;
+			
+			case(funct3)
+				3'b000: BrOp = 4'b1000; //equal
+				3'b001: BrOp = 4'b1001; //diff
+				3'b010: BrOp = 4'b1100; //menorq
+				3'b011: BrOp = 4'b1101; //mayorq
+				default: BrOp = 4'b0;
+			endcase
+		end
+		
       default: begin  
 			IMMSrc = 3'h0;
 			ALUBSrc = 1'b0;

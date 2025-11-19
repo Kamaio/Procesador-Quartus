@@ -1,0 +1,19 @@
+model branch_unit(
+
+	input wire [31:0] valA,
+	input wire [31:0] valB,
+	input wire [3:0] operacion,
+	
+	outpu wire resultado
+);
+
+always @ (*) begin
+	case (operacion)
+		4'b0000: resultado = ($signed(valA) == $signed(valB)); //Equal
+		4'b0001: resultado = ($signed(valA) != $signed(valB)); //Diff
+		4'b0100: resultado = ($signed(valA) < $signed(valB));  //Menorq
+		4'b0101: resultado = ($signed(valA) >= $signed(valB)); //Mayorq
+		default: resultado = 32'h0;
+    endcase
+  end
+endmodule
