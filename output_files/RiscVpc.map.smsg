@@ -1,1 +1,1 @@
-Warning (10268): Verilog HDL information at dataMemory.sv(61): always construct contains both blocking and non-blocking assignments File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/dataMemory.sv Line: 61
+Warning (10268): Verilog HDL information at dataMemory.sv(42): always construct contains both blocking and non-blocking assignments File: C:/Users/Juan Felipe Ocampo G/AppData/Local/quartus/Procesador/dataMemory.sv Line: 42

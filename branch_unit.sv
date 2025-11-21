@@ -13,6 +13,8 @@ always @ (*) begin
 		4'b1001: resultado = ($signed(valA) != $signed(valB)); //Diff
 		4'b1100: resultado = ($signed(valA) < $signed(valB));  //Menorq
 		4'b1101: resultado = ($signed(valA) >= $signed(valB)); //Mayorq
+		
+		4'b1111: resultado = 1'b1;   //da el permiso sin comparaciones, para tipo j          
 		default: resultado = 1'b0;
     endcase
   end

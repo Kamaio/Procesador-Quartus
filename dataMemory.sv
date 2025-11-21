@@ -7,27 +7,8 @@ module dataMemory(
 	 
     output reg [31:0] DataRd,  // Informacion de data memory que se carga (i carga)
 	 
-	 output wire [7:0] memoryD0,//vga
-	 output wire [7:0] memoryD1,
-	 output wire [7:0] memoryD2,
-	 output wire [7:0] memoryD3,
-	 output wire [7:0] memoryD4,
-	 output wire [7:0] memoryD5,
-	 output wire [7:0] memoryD6,
-	 output wire [7:0] memoryD7,
-	 output wire [7:0] memoryD8,
-	 output wire [7:0] memoryD9,
-	 output wire [7:0] memoryD10,
-    output wire [7:0] memoryD11,
-    output wire [7:0] memoryD12,
-    output wire [7:0] memoryD13,
-    output wire [7:0] memoryD14,
-    output wire [7:0] memoryD15,
-    output wire [7:0] memoryD16,
-    output wire [7:0] memoryD17,
-    output wire [7:0] memoryD18,
-    output wire [7:0] memoryD19,
-    output wire [7:0] memoryD20,
+	 
+	 output wire [7:0] memoriaVGA [0:20],
 	 
 	 output wire [31:0] salidaChimbaW, // Tipo s, escribir
 	 output wire [31:0] salidaChimbaR  // Tipo I carga, leer
@@ -89,5 +70,8 @@ module dataMemory(
 		  
 		  salidaChimbaR = DataRd;
     end
+	 
+	 
+	 assign memoriaVGA = memoria;
 
 endmodule

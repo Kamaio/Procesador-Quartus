@@ -9,37 +9,8 @@ module register_unit(
 	output wire [31:0] output_rs1,
 	output wire [31:0] output_rs2,
 	
-	output wire [31:0] memoryR1,//vga
-	output wire [31:0] memoryR2,
-	output wire [31:0] memoryR3,
-	output wire [31:0] memoryR4,
-	output wire [31:0] memoryR5,
-	output wire [31:0] memoryR6,
-	output wire [31:0] memoryR7,
-	output wire [31:0] memoryR8,
-	output wire [31:0] memoryR9,
-	output wire [31:0] memoryR10,
-   output wire [31:0] memoryR11,
-   output wire [31:0] memoryR12,
-   output wire [31:0] memoryR13,
-   output wire [31:0] memoryR14,
-   output wire [31:0] memoryR15,
-   output wire [31:0] memoryR16,
-   output wire [31:0] memoryR17,
-   output wire [31:0] memoryR18,
-   output wire [31:0] memoryR19,
-   output wire [31:0] memoryR20,
-   output wire [31:0] memoryR21,
-   output wire [31:0] memoryR22,
-   output wire [31:0] memoryR23,
-   output wire [31:0] memoryR24,
-   output wire [31:0] memoryR25,
-   output wire [31:0] memoryR26,
-   output wire [31:0] memoryR27,
-   output wire [31:0] memoryR28,
-   output wire [31:0] memoryR29,
-   output wire [31:0] memoryR30,
-   output wire [31:0] memoryR31
+	
+	output wire [31:0] registrosVGA [31:0]
 );
 
   reg [31:0] Registros [31:0];
@@ -89,5 +60,7 @@ module register_unit(
       Registros[rd] <= resultadoALU;
     
   end
+  
+  assign registrosVGA = Registros;
 
 endmodule

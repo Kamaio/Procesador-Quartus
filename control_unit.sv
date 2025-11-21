@@ -111,7 +111,7 @@ always @(*) begin
 		end
 
 		7'b1100011: begin			//tipo B
-			RUWr = 1'b1;         
+			RUWr = 1'b0;         
 			IMMSrc = 3'b011;
 			ALUASrc = 1'b1;      //multiplerxor A manda el pc en vez de el registro rs1
 			ALUBSrc = 1'b1;      //multiplexor B
@@ -127,6 +127,64 @@ always @(*) begin
 				default: BrOp = 4'b0;
 			endcase
 		end
+		
+		7'b1101111: begin       //jal
+			RUWr = 1'b1;         //escribir en la register unit
+			IMMSrc = 3'b101;     //reconstruir j
+			ALUASrc = 1'b1;      //multiplerxor A manda el pc
+			ALUBSrc = 1'b1;      //multiplexor B manda el imm
+			ALUop = 4'b0000;     //add
+			RUDataWrSrc = 2'b10; //mux de data memory deja pasar el pc del sumador
+			
+			DMWR = 1'b0;
+			
+			BrOp = 4'b1111;       //enciende la branch unit
+		end
+		
+		7'b1100111: begin       //jalr
+			RUWr = 1'b1;         //escribir en la register unit
+			IMMSrc = 3'b001;     //reconstruir i
+			ALUASrc = 1'b0;      //multiplerxor A manda el rs1
+			ALUBSrc = 1'b1;      //multiplexor B manda el imm
+			ALUop = 4'b0000;     //add
+			RUDataWrSrc = 2'b10; //mux de data memory deja pasar el pc del sumador
+			
+			DMWR = 1'b0;
+			
+			BrOp = 4'b1111;       //enciende la branch unit
+		end
+		
+		7'b0110111: begin       //tipo U lui
+			RUWr = 1'b1;         //escribir en la register unit
+			IMMSrc = 3'b100;     //reconstruir ls tipo U
+			ALUASrc = 1'b0;      //multiplerxor A apagado
+			ALUBSrc = 1'b1;      //multiplexor B manda el imm
+			ALUop = 4'b1111;     //lui
+			RUDataWrSrc = 2'b00; //mux de data memory deja pasar la ALU
+			
+			DMWR = 1'b0;
+			
+			BrOp = 4'b0000;       //apaga la branch unit
+		end
+		
+		7'b0010111: begin
+			RUWr = 1'b1;         //escribir en la register unit
+			IMMSrc = 3'b100;     //reconstruir ls tipo U
+			ALUASrc = 1'b1;      //deja pasar el pc
+			ALUBSrc = 1'b1;      //multiplexor B manda el imm
+			ALUop = 4'b0000;     //add
+			RUDataWrSrc = 2'b00; //mux de data memory deja pasar la ALU
+			
+			DMWR = 1'b0;
+			
+			BrOp = 4'b0000;       //apaga la branch unit
+		
+		
+		end
+		
+		
+		
+		
 		
       default: begin  
 			IMMSrc = 3'h0;

@@ -16,6 +16,8 @@ module ALU(
       4'b0111: resultado = valA & valB;                     // and
       4'b1000: resultado = ($signed(valA) - $signed(valB)); // sub
       4'b1101: resultado = $signed(valA) >>> valB[4:0];     // sra
+		
+		4'b1111: resultado = valB;                            //lui, deja pasar el inmediato tal cual
       default: resultado = 32'h0;
     endcase
   end
