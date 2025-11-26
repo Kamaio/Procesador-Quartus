@@ -231,6 +231,12 @@ module top_level(
   always @(*) begin
 		dataFinal = (RUDataWrSrc == 2'b01)? DataRd : (RUDataWrSrc == 2'b10)? nextPC : resultadoALU; //devuelve el siguiente pc o la data memory o la ALU
 	end
+	
+	
+	//ebreak
+	always @(*) begin
+		ebreak = (opcode == 7'b1110011)? 1'b1 : 1'b0;
+	end
   
   
   
@@ -267,7 +273,9 @@ module top_level(
 	  
 
 	  .memoryR(registrosVGA),
-	  .memoryD(memoriaVGA)
+	  .memoryD(memoriaVGA),
+	  
+	  .ebreak(ebreak)
   );
 
   

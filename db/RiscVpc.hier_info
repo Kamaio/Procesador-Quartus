@@ -8157,6 +8157,7 @@ rdata2Final[31] => ascii.DATAB
 rdata2Final[31] => Add67.IN4
 RUDataWrSrc[0] => mensaje[10][6][0].DATAIN
 RUDataWrSrc[1] => mensaje[10][6][1].DATAIN
+ebreak => always0.IN1
 memoryR[0][0] => ~NO_FANOUT~
 memoryR[0][1] => ~NO_FANOUT~
 memoryR[0][2] => ~NO_FANOUT~
